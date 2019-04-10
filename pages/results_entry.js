@@ -151,10 +151,22 @@ class ResultsEntry extends Component {
                     rankFunction(resp2.data.results, this.state.athletes, this.state.ageMin, this.state.ageMax).then(resp4=>{
                         this.setState({showScorecard: false, showCompetitors: true, currentAthlete: '', openDialog: false, showAgeSelect: true, 
                                 tieBreakMin: '', tieBreakSec: '', tieBreakMs: '', tiebreakerOb: '', obstacles: resp3, rankArr: resp4, resultsArr: resp2.data.results});
-                    })
-                })
+                    });
+                });
             });
         });
+    }
+
+    goBack(){
+        if(this.state.showScorecard == true){
+            resetObstacleArr(this.state.obstacles).then(resp=>{
+                this.setState({showScorecard: false, showCompetitors: true, currentAthlete: '', showAgeSelect: true, obstacles: resp})
+            });
+        }else if(this.state.showCompetitors == true || this.state.showAgeSelect == true){
+            this.setState({showCompetitors: false, ageMin: '', ageMax: '', showAgeSelect: false, showCourseSelect: true, obstacles: [], resultsArr: [] });
+        }else{
+            this.setState({showCourseSelect: false,  courseIndex: '', courses: [], athletes: [], location: '', showLocationSelect: true});
+        }
     }
 
     closeDialog = (type) =>{
@@ -172,6 +184,8 @@ class ResultsEntry extends Component {
 
         <Row>
                     <div className="pageContainer">
+                    {this.state.location !== '' ?
+                    <div className="choiceBox" onClick={e=>this.goBack()}>Back</div>: null}
                     {this.state.showLocationSelect == true ?
                     <div>
                         <div className="subTitle">Please Select Your Location</div>

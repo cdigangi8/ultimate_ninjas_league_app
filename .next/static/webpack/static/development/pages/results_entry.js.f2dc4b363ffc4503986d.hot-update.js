@@ -1,9 +1,9 @@
-webpackHotUpdate("static/development/pages/index.js",{
+webpackHotUpdate("static/development/pages/results_entry.js",{
 
-/***/ "./pages/index.js":
-/*!************************!*\
-  !*** ./pages/index.js ***!
-  \************************/
+/***/ "./pages/results_entry.js":
+/*!********************************!*\
+  !*** ./pages/results_entry.js ***!
+  \********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -85,23 +85,23 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var YlLeaderboard =
+var ResultsEntry =
 /*#__PURE__*/
 function (_Component) {
-  Object(_babel_runtime_corejs2_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_5__["default"])(YlLeaderboard, _Component);
+  Object(_babel_runtime_corejs2_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_5__["default"])(ResultsEntry, _Component);
 
-  function YlLeaderboard() {
+  function ResultsEntry() {
     var _getPrototypeOf2;
 
     var _this;
 
-    Object(_babel_runtime_corejs2_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_0__["default"])(this, YlLeaderboard);
+    Object(_babel_runtime_corejs2_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_0__["default"])(this, ResultsEntry);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    _this = Object(_babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__["default"])(this, (_getPrototypeOf2 = Object(_babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__["default"])(YlLeaderboard)).call.apply(_getPrototypeOf2, [this].concat(args)));
+    _this = Object(_babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__["default"])(this, (_getPrototypeOf2 = Object(_babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__["default"])(ResultsEntry)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
     Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this), "state", {
       location: "",
@@ -133,10 +133,16 @@ function (_Component) {
       };
     });
 
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this), "closeDialog", function (type) {
+      _this.setState({
+        openDialog: false
+      });
+    });
+
     return _this;
   }
 
-  Object(_babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_1__["default"])(YlLeaderboard, [{
+  Object(_babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_1__["default"])(ResultsEntry, [{
     key: "setLocation",
     value: function setLocation(val) {
       var _this2 = this;
@@ -191,6 +197,177 @@ function (_Component) {
       });
     }
   }, {
+    key: "setScorecard",
+    value: function setScorecard(athlete) {
+      var elementPos = this.state.rankArr.map(function (x) {
+        return x.athlete_id;
+      }).indexOf(athlete);
+      this.setState({
+        currentAthleteIndex: elementPos,
+        currentAthlete: athlete,
+        showCompetitors: false,
+        showAgeSelect: false,
+        showScorecard: true
+      });
+    }
+  }, {
+    key: "createPointRow",
+    value: function createPointRow(item) {
+      var _this5 = this;
+
+      var table = [];
+
+      var _loop = function _loop(i) {
+        table.push(react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+          className: item.choices[i].selected == true ? "obstacleBoxContent activeBox" : "obstacleBoxContent",
+          onClick: function onClick(e) {
+            return _this5.addPoints(item, item.choices[i].key);
+          }
+        }, item.choices[i].value));
+      };
+
+      for (var i = 0; i < item.choices.length; i++) {
+        _loop(i);
+      }
+
+      return table;
+    }
+  }, {
+    key: "checkTie",
+    value: function checkTie() {
+      var _this6 = this;
+
+      var tie = false;
+      var tieOB;
+      this.state.obstacles.forEach(function (item, index) {
+        for (var i = 0; i < item.choices.length; i++) {
+          if (tie == false && i !== item.choices.length - 1 && item.choices[i].selected == true) {
+            tie = true;
+            tieOB = item.obOrder;
+
+            _this6.setState({
+              tiebreakerOb: tieOB
+            });
+          }
+        }
+
+        if (tie == false) {
+          _this6.setState({
+            tiebreakerOb: ""
+          });
+        }
+      });
+    }
+  }, {
+    key: "convertTime",
+    value: function convertTime(min, sec, ms) {
+      if (min < 10) {
+        min = '0' + min;
+      }
+
+      if (sec < 10) {
+        sec = '0' + sec;
+      }
+
+      if (ms < 10) {
+        ms = '0' + ms;
+      }
+
+      return '00' + ':' + min + ':' + sec + '.' + ms;
+    }
+  }, {
+    key: "addPoints",
+    value: function addPoints(item, c_id) {
+      for (var i = 0; i < item.choices.length; i++) {
+        if (item.choices[i].key != c_id) {
+          item.choices[i].selected = false;
+        } else {
+          item.choices[i].selected = true;
+          this.checkTie();
+        }
+      }
+
+      this.setState({
+        obstacles: this.state.obstacles
+      });
+    }
+  }, {
+    key: "confirmSubmission",
+    value: function confirmSubmission() {
+      this.setState({
+        openDialog: true
+      });
+    }
+  }, {
+    key: "submitScorecard",
+    value: function submitScorecard() {
+      var _this7 = this;
+
+      var tiebreakTime = this.convertTime(this.state.tieBreakMin, this.state.tieBreakSec, this.state.tieBreakMs);
+      console.log(tiebreakTime);
+      Object(_controllers_controllers__WEBPACK_IMPORTED_MODULE_11__["calculateScore"])(this.state.obstacles).then(function (resp) {
+        var points = resp.score;
+        var resultString = resp.resStr;
+        Object(_api_api__WEBPACK_IMPORTED_MODULE_10__["postScorecard"])(_this7.state.currentAthlete, _this7.state.courses[_this7.state.courseIndex].course_id, points, _this7.state.tiebreakerOb, tiebreakTime, resultString).then(function (resp2) {
+          console.log(resp2);
+          Object(_controllers_controllers__WEBPACK_IMPORTED_MODULE_11__["resetObstacleArr"])(_this7.state.obstacles).then(function (resp3) {
+            Object(_controllers_controllers__WEBPACK_IMPORTED_MODULE_11__["rankFunction"])(resp2.data.results, _this7.state.athletes, _this7.state.ageMin, _this7.state.ageMax).then(function (resp4) {
+              _this7.setState({
+                showScorecard: false,
+                showCompetitors: true,
+                currentAthlete: '',
+                openDialog: false,
+                showAgeSelect: true,
+                tieBreakMin: '',
+                tieBreakSec: '',
+                tieBreakMs: '',
+                tiebreakerOb: '',
+                obstacles: resp3,
+                rankArr: resp4,
+                resultsArr: resp2.data.results
+              });
+            });
+          });
+        });
+      });
+    }
+  }, {
+    key: "goBack",
+    value: function goBack() {
+      var _this8 = this;
+
+      if (this.state.showScorecard == true) {
+        Object(_controllers_controllers__WEBPACK_IMPORTED_MODULE_11__["resetObstacleArr"])(this.state.obstacles).then(function (resp) {
+          _this8.setState({
+            showScorecard: false,
+            showCompetitors: true,
+            currentAthlete: '',
+            showAgeSelect: true,
+            obstacles: resp
+          });
+        });
+      } else if (this.state.showCompetitors == true || this.state.showAgeSelect == true) {
+        this.setState({
+          showCompetitors: false,
+          ageMin: '',
+          ageMax: '',
+          showAgeSelect: false,
+          showCourseSelect: true,
+          obstacles: [],
+          resultsArr: []
+        });
+      } else {
+        this.setState({
+          showCourseSelect: false,
+          courseIndex: '',
+          courses: [],
+          athletes: [],
+          location: '',
+          showLocationSelect: true
+        });
+      }
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       console.log(this);
@@ -198,7 +375,7 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this5 = this;
+      var _this9 = this;
 
       return react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "resultsEntry"
@@ -208,7 +385,12 @@ function (_Component) {
         linkTitle: ""
       }), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_27__["Row"], null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "pageContainer"
-      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, "Reload the page to go back to the location selection!"), this.state.showLocationSelect == true ? react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+      }, this.state.location !== '' ? react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+        className: "choiceBox",
+        onClick: function onClick(e) {
+          return _this9.goBack();
+        }
+      }, "Back") : null, this.state.showLocationSelect == true ? react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "subTitle"
       }, "Please Select Your Location"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_27__["Row"], {
         horizontal: "spaced",
@@ -219,17 +401,17 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "choiceBox",
         onClick: function onClick(e) {
-          return _this5.setLocation(1);
+          return _this9.setLocation(1);
         }
       }, "Chicago"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "choiceBox",
         onClick: function onClick(e) {
-          return _this5.setLocation(2);
+          return _this9.setLocation(2);
         }
       }, "Naperville"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "choiceBox",
         onClick: function onClick(e) {
-          return _this5.setLocation(3);
+          return _this9.setLocation(3);
         }
       }, "Libertyville"))) : null, this.state.showCourseSelect == true ? react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "subTitle"
@@ -243,7 +425,7 @@ function (_Component) {
         return react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
           className: "choiceBox",
           onClick: function onClick(e) {
-            return _this5.setCourse(index);
+            return _this9.setCourse(index);
           }
         }, item.comp_date.split("T")[0]);
       })), " ") : null, this.state.showAgeSelect == true ? react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
@@ -257,22 +439,22 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: this.state.ageMax == 8 ? "choiceBox activeBox" : "choiceBox",
         onClick: function onClick(e) {
-          return _this5.setAgeGroup(6, 8);
+          return _this9.setAgeGroup(6, 8);
         }
       }, "Ages 6-8"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: this.state.ageMax == 10 ? "choiceBox activeBox" : "choiceBox",
         onClick: function onClick(e) {
-          return _this5.setAgeGroup(9, 10);
+          return _this9.setAgeGroup(9, 10);
         }
       }, "Ages 9-10"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: this.state.ageMax == 12 ? "choiceBox activeBox" : "choiceBox",
         onClick: function onClick(e) {
-          return _this5.setAgeGroup(11, 12);
+          return _this9.setAgeGroup(11, 12);
         }
       }, "Ages 11-12"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: this.state.ageMax == 16 ? "choiceBox activeBox" : "choiceBox",
         onClick: function onClick(e) {
-          return _this5.setAgeGroup(13, 16);
+          return _this9.setAgeGroup(13, 16);
         }
       }, "Ages 13-16")), " ") : null, this.state.showCompetitors == true ? react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "subTitle"
@@ -283,29 +465,136 @@ function (_Component) {
           marginTop: "20px"
         }
       }, this.state.rankArr.map(function (item, index) {
-        if (item.age >= _this5.state.ageMin && item.age < _this5.state.ageMax + 1) {
+        if (item.age >= _this9.state.ageMin && item.age < _this9.state.ageMax + 1) {
           return react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
-            className: item.completed == true ? "athleteBox completed" : "athleteBox"
+            className: item.completed == true ? "athleteBox completed" : "athleteBox",
+            onClick: function onClick(e) {
+              return _this9.setScorecard(item.athlete_id);
+            }
           }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_27__["Row"], {
             horizontal: "space-around",
             vertical: "center"
-          }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, item.rank, "."), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, item.first_name + ' ' + item.last_name.substring(1, 1)), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, item.points), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+          }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, item.rank, "."), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, item.first_name + ' ' + item.last_name), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, item.points), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
             style: {
               fontSize: ".8em",
               color: "#979797"
             }
           }, "Pts."))));
         }
-      })), " ") : null)));
+      })), " ") : null, this.state.showScorecard == true ? react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+        className: "subTitle"
+      }, "Scorecard"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_27__["Row"], {
+        horizontal: "spaced",
+        wrap: true,
+        style: {
+          marginTop: "20px"
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, "Name:"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+        className: "scName"
+      }, this.state.rankArr[this.state.currentAthleteIndex].first_name + ' ' + this.state.rankArr[this.state.currentAthleteIndex].last_name))), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_27__["Column"], {
+        horizontal: "center"
+      }, this.state.obstacles.map(function (item, index) {
+        return react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+          className: "obstacleBox"
+        }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+          className: "obstacleBoxTitle"
+        }, item.obstacle), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_27__["Row"], {
+          horizontal: "center"
+        }, _this9.createPointRow(item)));
+      })), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_27__["Row"], {
+        horizontal: "center",
+        style: {
+          marginTop: "20px"
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+        style: {
+          marginRight: "30px"
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, "Tiebreaker Obstacle"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+        align: "middle",
+        style: {
+          fontSize: "18px",
+          fontWeight: "bold",
+          marginTop: "10px"
+        }
+      }, this.state.tiebreakerOb)), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, "Tiebreaker Time"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+        style: {
+          marginTop: "10px"
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("input", {
+        style: {
+          width: '50px'
+        },
+        className: "skillInput",
+        type: "number",
+        placeholder: "min",
+        value: this.state.tieBreakMin,
+        onChange: this.handleChange('tieBreakMin')
+      })), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("span", {
+        style: {
+          paddingLeft: '5px',
+          paddingRight: '5px',
+          fontSize: "18px",
+          fontWeight: "bold"
+        }
+      }, ":"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("input", {
+        style: {
+          width: '50px'
+        },
+        className: "skillInput",
+        type: "number",
+        placeholder: "sec",
+        value: this.state.tieBreakSec,
+        onChange: this.handleChange('tieBreakSec')
+      })), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("span", {
+        style: {
+          paddingLeft: '5px',
+          paddingRight: '5px',
+          fontSize: "18px",
+          fontWeight: "bold"
+        }
+      }, ":"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("input", {
+        style: {
+          width: '50px'
+        },
+        className: "skillInput",
+        type: "number",
+        placeholder: "ms",
+        value: this.state.tieBreakMs,
+        onChange: this.handleChange('tieBreakMs')
+      }))))), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_27__["Row"], {
+        horiozontal: "center"
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("button", {
+        className: "submitBtn",
+        onClick: function onClick(e) {
+          return _this9.confirmSubmission();
+        }
+      }, "Submit"))) : null)), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_material_ui_core_Dialog__WEBPACK_IMPORTED_MODULE_14___default.a, {
+        open: this.state.openDialog,
+        onClose: this.handleClose,
+        "aria-labelledby": "form-dialog-title"
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_material_ui_core_DialogTitle__WEBPACK_IMPORTED_MODULE_18___default.a, {
+        id: "form-dialog-title"
+      }, "Are you sure you want to submit this scorecard?"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_material_ui_core_DialogContent__WEBPACK_IMPORTED_MODULE_16___default.a, null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_material_ui_core_DialogContentText__WEBPACK_IMPORTED_MODULE_17___default.a, null)), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_material_ui_core_DialogActions__WEBPACK_IMPORTED_MODULE_15___default.a, null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_12___default.a, {
+        type: "submit",
+        onClick: function onClick(e) {
+          return _this9.submitScorecard();
+        },
+        color: "primary"
+      }, "Submit"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_12___default.a, {
+        type: "submit",
+        onClick: this.closeDialog,
+        color: "default"
+      }, "Cancel"))));
     }
   }]);
 
-  return YlLeaderboard;
+  return ResultsEntry;
 }(react__WEBPACK_IMPORTED_MODULE_7__["Component"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (YlLeaderboard);
+/* harmony default export */ __webpack_exports__["default"] = (ResultsEntry);
 
 /***/ })
 
 })
-//# sourceMappingURL=index.js.b68a3b823ab1fb2af0f9.hot-update.js.map
+//# sourceMappingURL=results_entry.js.f2dc4b363ffc4503986d.hot-update.js.map
