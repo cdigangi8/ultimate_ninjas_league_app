@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import UNHeader from "../components/header";
 import '../style/results_entry.css';
-import {getCompInfo, getCourseObstacles, postScorecard} from '../api/api';
+import {getCompInfo, getCourseObstacles, postScorecard, postStandings} from '../api/api';
 import {convertObstacles, calculateScore, resetObstacleArr,rankFunction} from '../controllers/controllers';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -45,7 +45,8 @@ class ResultsEntry extends Component {
         tieBreakMs: '',
         openDialog: false,
         resultsArr: [],
-        rankArr: []
+        rankArr: [],
+        openFinalDialog: false
     };
 
     handleChange = name => event => {
@@ -135,8 +136,12 @@ class ResultsEntry extends Component {
         this.setState({obstacles: this.state.obstacles});
     }
 
-    confirmSubmission(){
-        this.setState({openDialog: true});
+    confirmSubmission(val){
+        if(val =='scorecard'){
+            this.setState({openDialog: true});
+        }else{
+            this.setState({openFinalDialog: true});
+        }   
     }
 
     submitScorecard(){
@@ -157,6 +162,12 @@ class ResultsEntry extends Component {
         });
     }
 
+    finalizeResults(){
+        postStandings(this.state.rankArr).then(resp=>{
+            console.log(resp);
+        });
+    }
+
     goBack(){
         if(this.state.showScorecard == true){
             resetObstacleArr(this.state.obstacles).then(resp=>{
@@ -170,7 +181,7 @@ class ResultsEntry extends Component {
     }
 
     closeDialog = (type) =>{
-        this.setState({ openDialog: false });
+        this.setState({ openDialog: false, openFinalDialog: false });
 }
 
 
@@ -228,7 +239,10 @@ class ResultsEntry extends Component {
                                 </div>
                             }
                         })}
-                        </Column> </div>: null}
+                        </Column>
+                        <Row horiozontal="center">
+                        <button className='submitBtn' onClick={ e => this.confirmSubmission('results')}>Submit</button>
+                        </Row> </div>: null}
 
                         {this.state.showScorecard == true ?
                         <div>
@@ -265,7 +279,7 @@ class ResultsEntry extends Component {
                             </div>
                         </Row>
                         <Row horiozontal="center">
-                        <button className='submitBtn' onClick={ e => this.confirmSubmission()}>Submit</button>
+                        <button className='submitBtn' onClick={ e => this.confirmSubmission('scorecard')}>Submit</button>
                         </Row>
                         </div>: null}
                         
@@ -285,6 +299,27 @@ class ResultsEntry extends Component {
                     </DialogContent>
                     <DialogActions>
                     <Button type='submit' onClick={e => this.submitScorecard()} color="primary">
+                            Submit
+            </Button>
+                        <Button type='submit' onClick={this.closeDialog} color="default">
+                            Cancel
+            </Button>
+                    </DialogActions>
+                </Dialog>
+
+                <Dialog
+                    open={this.state.openFinalDialog}
+                    onClose={this.handleClose}
+                    aria-labelledby="form-dialog-title"
+                >
+                    <DialogTitle id="form-dialog-title">Are you sure you want to submit these results?</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            
+            </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                    <Button type='submit' onClick={e => this.finalizeResults()} color="primary">
                             Submit
             </Button>
                         <Button type='submit' onClick={this.closeDialog} color="default">

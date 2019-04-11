@@ -4,7 +4,7 @@
 /*!********************!*\
   !*** ./api/api.js ***!
   \********************/
-/*! exports provided: addCompetitor, getCompInfo, getCourseObstacles, postScorecard */
+/*! exports provided: addCompetitor, getCompInfo, getCourseObstacles, postScorecard, postStandings */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -13,6 +13,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCompInfo", function() { return getCompInfo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCourseObstacles", function() { return getCourseObstacles; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postScorecard", function() { return postScorecard; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "postStandings", function() { return postStandings; });
 /* harmony import */ var _babel_runtime_corejs2_core_js_promise__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/promise */ "./node_modules/@babel/runtime-corejs2/core-js/promise.js");
 /* harmony import */ var _babel_runtime_corejs2_core_js_promise__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_promise__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
@@ -76,6 +77,20 @@ function postScorecard(athlete, course, points, tieOB, tieTime, resStr) {
         tieOB: tieOB,
         tieTime: tieTime,
         resStr: resStr
+      }
+    }).then(function (resp) {
+      res(resp);
+    }).catch(function (err) {
+      return reject(err);
+    });
+  });
+  return p;
+}
+function postStandings(arr) {
+  var p = new _babel_runtime_corejs2_core_js_promise__WEBPACK_IMPORTED_MODULE_0___default.a(function (res, reject) {
+    axios__WEBPACK_IMPORTED_MODULE_1___default.a.post("/api/post_standings", {
+      params: {
+        array: arr
       }
     }).then(function (resp) {
       res(resp);
@@ -371,13 +386,7 @@ function rankArrFunc(arr) {
 
     if (newRank == true) {
       arr[a].rank = rank;
-      console.log(rank + arr[a].first_name); // for(var c=0; c<arr.length; c++){
-      //     console.log(arr[c].rank + 'rank' + arr[c].first_name);
-      //     if((arr[c].rank !='' && arr[c].rank !=null && arr[c].rank !=undefined ) && arr[c].rank >= arr[a].rank && arr[c].athlete_id !== arr[a].athlete_id){
-      //         arr[c].rank += 1;
-      //         console.log('rank changed' + arr[c].rank + arr[c].first_name);
-      //     }
-      // }
+      console.log(rank + arr[a].first_name);
     } else {
       arr[a].rank = arr.length;
     }
@@ -412,152 +421,14 @@ function rankFunction(results, athletes, ageMin, ageMax) {
         kidArray[a].completed = false;
         kidArray[a].rank = '';
       }
-    } // athletes.forEach(function(item, index){
-    //     var obj = {};
-    //     var ageMin;
-    //     var ageMax;
-    //     obj.first_name = item.first_name;
-    //     obj.last_name = item.last_name;
-    //     obj.athlete_id = item.athlete_id;
-    //     obj.age = item.age;
-    //     if(item.age == 6 || item.age == 7 || item.age == 8){
-    //         ageMin = 6;
-    //         ageMax = 8;
-    //     }else if(item.age == 9 || item.age == 10){
-    //         ageMin = 9;
-    //         ageMax = 10;
-    //     }else if(item.age == 11 || item.age == 12){
-    //         ageMin = 11;
-    //         ageMax = 12;
-    //     }else if(item.age == 13 || item.age == 16){
-    //         ageMin = 13;
-    //         ageMax = 16;
-    //     }
-    //     for(var i=0; i<results.length; i++){
-    //         if(item.athlete_id == results[i].athlete_id){
-    //             obj.points = results[i].Points;
-    //             obj.tieOB = results[i].tiebreaker_obstacle;
-    //             obj.tieTime = results[i].tiebreaker_time;
-    //             obj.resultStr = results[i].result_string;
-    //             obj.completed = true;
-    //             break;
-    //         }else{
-    //             obj.points = '';
-    //             obj.tieOB = '';
-    //             obj.tieTime = '';
-    //             obj.resultStr = '';
-    //             obj.completed = false;
-    //             obj.rank = '';
-    //         }
-    //     }
-    //     if(obj.points != ''){
-    //         var rank = 1;
-    //         if(rankArr.length < 1){
-    //             obj.rank = rank;
-    //             rankArr.push(rankArr);
-    //         }else{
-    //             for(var k=0; k<rankArr.length;k++){
-    //                 if(rankArr[k].points == '' ){
-    //                     obj.rank = rank;
-    //                     rankArr.unshift(obj);
-    //                 }else{
-    //                     if(rankArr[k].age >= ageMin && item.age < ageMax+1){
-    //                         if(obj.points == rankArr[k].points){
-    //                             //tie in points
-    //                             if(obj.tieOB > rankArr[k].tieOB){
-    //                                 obj.rank = rank;
-    //                                 rankArr.splice((k-1), 0, obj);
-    //                                 for(var z=k+1; z<rankArr.length; z++){
-    //                                     if(rankArr[z].age >= ageMin && item.age < ageMax+1 && rankArr[z].rank !=''){
-    //                                         rankArr[z].rank += 1;
-    //                                     }
-    //                                 }
-    //                                 break;
-    //                             }else if(obj.tieOB != '' && obj.tieOB == rankArr[k].tieOB){
-    //                                 var ath1res = JSON.parse('['+obj.resultStr+']');
-    //                                 var ath1pts;
-    //                                 var ath2res = JSON.parse('['+rankArr[k].resultStr+']');
-    //                                 var ath2pts;
-    //                                 ath1res.forEach((item,index)=>{
-    //                                     if(item.key == obj.tieOB){
-    //                                         ath1pts = item.value;
-    //                                     }
-    //                                 });
-    //                                 ath2res.forEach((item,index)=>{
-    //                                     if(item.key == rankArr[k].tieOB){
-    //                                         ath2pts = item.value;
-    //                                     }
-    //                                 });
-    //                                 if(ath1pts > ath2pts){
-    //                                     obj.rank = rank;
-    //                                     rankArr.splice((k-1), 0, obj);
-    //                                     for(var z=k+1; z<rankArr.length; z++){
-    //                                         if(rankArr[z].age >= ageMin && item.age < ageMax+1 && rankArr[z].rank !=''){
-    //                                             rankArr[z].rank += 1;
-    //                                         }
-    //                                     }
-    //                                     break;
-    //                                 }else if(ath1pts == ath2pts){
-    //                                     if(obj.tieTime > rankArr[k].tieTime){
-    //                                         obj.rank = rank;
-    //                                         rankArr.splice((k-1), 0, obj);
-    //                                         for(var z=k+1; z<rankArr.length; z++){
-    //                                             if(rankArr[z].age >= ageMin && item.age < ageMax+1 && rankArr[z].rank !=''){
-    //                                                 rankArr[z].rank += 1;
-    //                                             }
-    //                                         }
-    //                                         break;
-    //                                     }else if(obj.tieTime == rankArr[k].tieTime){
-    //                                         obj.rank = rank;
-    //                                         rankArr.splice((k-1), 0, obj);
-    //                                         break;
-    //                                     }else{
-    //                                         rank += 1;
-    //                                     }
-    //                                 }else{
-    //                                     rank += 1;
-    //                                 }
-    //                             }
-    //                         }else if(obj.points < rankArr[k].points){
-    //                             //lower points
-    //                             rank += 1;
-    //                         }else{
-    //                             //more points
-    //                             obj.rank = rank;
-    //                             rankArr.splice((k-1), 0, obj);
-    //                             for(var z=k+1; z<rankArr.length; z++){
-    //                                 if(rankArr[z].age >= ageMin && item.age < ageMax+1 && rankArr[z].rank !=''){
-    //                                     rankArr[z].rank += 1;
-    //                                 }
-    //                             }
-    //                             break;
-    //                         }
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }else{
-    //         rankArr.push(obj);
-    //     }
-    // });
-    // kidArray.sort(compare);
-
+    }
 
     var rankArray = rankArrFunc(kidArray);
     rankArray.sort(compare);
     res(rankArray);
   });
   return p;
-} //need to return array of objects with:
-
-/*
-athlete first_name
-athlete last_name
-athlete id
-athlete age
-rank
-points
-*/
+}
 
 /***/ }),
 
@@ -37560,7 +37431,8 @@ function (_Component) {
       tieBreakMs: '',
       openDialog: false,
       resultsArr: [],
-      rankArr: []
+      rankArr: [],
+      openFinalDialog: false
     });
 
     Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this), "handleChange", function (name) {
@@ -37571,7 +37443,8 @@ function (_Component) {
 
     Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this), "closeDialog", function (type) {
       _this.setState({
-        openDialog: false
+        openDialog: false,
+        openFinalDialog: false
       });
     });
 
@@ -37729,10 +37602,16 @@ function (_Component) {
     }
   }, {
     key: "confirmSubmission",
-    value: function confirmSubmission() {
-      this.setState({
-        openDialog: true
-      });
+    value: function confirmSubmission(val) {
+      if (val == 'scorecard') {
+        this.setState({
+          openDialog: true
+        });
+      } else {
+        this.setState({
+          openFinalDialog: true
+        });
+      }
     }
   }, {
     key: "submitScorecard",
@@ -37765,6 +37644,13 @@ function (_Component) {
             });
           });
         });
+      });
+    }
+  }, {
+    key: "finalizeResults",
+    value: function finalizeResults() {
+      Object(_api_api__WEBPACK_IMPORTED_MODULE_10__["postStandings"])(this.state.rankArr).then(function (resp) {
+        console.log(resp);
       });
     }
   }, {
@@ -37917,7 +37803,14 @@ function (_Component) {
             }
           }, "Pts."))));
         }
-      })), " ") : null, this.state.showScorecard == true ? react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+      })), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_27__["Row"], {
+        horiozontal: "center"
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("button", {
+        className: "submitBtn",
+        onClick: function onClick(e) {
+          return _this9.confirmSubmission('results');
+        }
+      }, "Submit")), " ") : null, this.state.showScorecard == true ? react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "subTitle"
       }, "Scorecard"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_27__["Row"], {
         horizontal: "spaced",
@@ -38003,7 +37896,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("button", {
         className: "submitBtn",
         onClick: function onClick(e) {
-          return _this9.confirmSubmission();
+          return _this9.confirmSubmission('scorecard');
         }
       }, "Submit"))) : null)), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_material_ui_core_Dialog__WEBPACK_IMPORTED_MODULE_14___default.a, {
         open: this.state.openDialog,
@@ -38021,6 +37914,22 @@ function (_Component) {
         type: "submit",
         onClick: this.closeDialog,
         color: "default"
+      }, "Cancel"))), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_material_ui_core_Dialog__WEBPACK_IMPORTED_MODULE_14___default.a, {
+        open: this.state.openFinalDialog,
+        onClose: this.handleClose,
+        "aria-labelledby": "form-dialog-title"
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_material_ui_core_DialogTitle__WEBPACK_IMPORTED_MODULE_18___default.a, {
+        id: "form-dialog-title"
+      }, "Are you sure you want to submit these results?"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_material_ui_core_DialogContent__WEBPACK_IMPORTED_MODULE_16___default.a, null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_material_ui_core_DialogContentText__WEBPACK_IMPORTED_MODULE_17___default.a, null)), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_material_ui_core_DialogActions__WEBPACK_IMPORTED_MODULE_15___default.a, null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_12___default.a, {
+        type: "submit",
+        onClick: function onClick(e) {
+          return _this9.finalizeResults();
+        },
+        color: "primary"
+      }, "Submit"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_12___default.a, {
+        type: "submit",
+        onClick: this.closeDialog,
+        color: "default"
       }, "Cancel"))));
     }
   }]);
@@ -38032,7 +37941,7 @@ function (_Component) {
 
 /***/ }),
 
-/***/ 4:
+/***/ 1:
 /*!******************************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fresults_entry&absolutePagePath=%2FUsers%2Fchristopherdigangi%2Fgit%2Fultimate_ninjas_app%2Fpages%2Fresults_entry.js ***!
   \******************************************************************************************************************************************************************/
@@ -38055,5 +37964,5 @@ module.exports = dll_6dc2816e14fab51b8269;
 
 /***/ })
 
-},[[4,"static/runtime/webpack.js","styles"]]]));;
+},[[1,"static/runtime/webpack.js","styles"]]]));;
 //# sourceMappingURL=results_entry.js.map
