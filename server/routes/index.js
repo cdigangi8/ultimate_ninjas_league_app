@@ -99,13 +99,40 @@ router.post('/add_competitor', function(req, res){
   router.post('/post_standings', function(req, res){
     var con = openConnection();
     console.log(req.body.params);
-    var arr = req.body.params.array;
-    arr.forEach(function(item, index){
-      var sql = "SELECT * FROM yl_standings WHERE athlete_id = " + item.athlete_id;
+    // var arr = req.body.params.array;
+    // var item = req.body.params.athlete;
+    
+    // arr.forEach(function(item, index){
+      var sql = "SELECT * FROM yl_standings ys INNER JOIN yl_courses yc ON ys.course_id = yc.course_id and ys.athlete_id = " + req.body.params.athlete_id + " and ys.yl_id= " + req.body.params.course.yl_id;
       sqlReq(con,sql).then(resp=>{
-        console.log(resp);
+        var runSQL = true;
+        if(resp.length < 1){
+          sql = "INSERT INTO yl_standings (athlete_id, Points, course_id) \
+          VALUES (" + req.body.params.athlete_id + ", " + req.body.params.points + ", " + req.body.params.course.course_id + ")";
+        }else{
+          var ylDate = new Date(resp[0].comp_date);
+          var newDate = new Date(req.body.params.course.comp_date);
+          console.log(ylDate);
+          if(newDate.getTime() > ylDate.getTime()){
+            var newPoints = parseInt(resp[0].Points) + parseInt(req.body.params.points);
+            sql = "UPDATE yl_standings SET Points = " + newPoints + ", course_id = \
+            " + req.body.params.course.course_id + " WHERE athlete_id = " + req.body.params.athlete_id;
+          }else{
+            runSQL = false;
+          }
+        }
+        if(runSQL == true){
+          sqlReq(con,sql).then(resp2=>{
+            con.end();
+            res.json({'request': resp2});
+          });
+        }else{
+          con.end();
+            res.json({'request': "Standings already up to date!"});
+        }
+        
       });
-    });
+    // });
     // var sql = "INSERT INTO yl_results (athlete_id, course_id, Points, tiebreaker_obstacle, tiebreaker_time, result_string) \
     //             VALUES('" + req.body.params.athlete + "','" + req.body.params.course + "',\
     //             '" + req.body.params.points + "','" + req.body.params.tieOB + "',\
@@ -113,8 +140,7 @@ router.post('/add_competitor', function(req, res){
     //   sqlReq(con,sql).then(resp=>{
     //     sql = "SELECT * FROM yl_results WHERE course_id = " + req.body.params.course;
     //     sqlReq(con,sql).then(resp2=>{
-          con.end();
-    //       res.json({'results': resp2});
+          
     //     })
     //   });
   });

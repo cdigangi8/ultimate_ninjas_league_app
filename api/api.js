@@ -62,11 +62,14 @@ export function postScorecard(athlete, course, points, tieOB, tieTime, resStr){
     return p;
 }
 
-export function postStandings(arr){
+export function postStandings(athlete, course, points){
     const p = new Promise((res,reject)=>{
         axios.post(`/api/post_standings`, {
             params: {
-                array: arr
+                // array: arr,
+                athlete_id: athlete.athlete_id,
+                course: course,
+                points: points
             }
         }).then(resp=>{
             res(resp);

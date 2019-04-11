@@ -63,8 +63,14 @@ class ResultsEntry extends Component {
     }
 
     setCourse(ind){
-        this.setState({courseIndex: ind, showCourseSelect: false, showAgeSelect: true});
-        getCourseObstacles(this.state.courses[ind].course_id).then(resp=>{
+        var indx;
+        for(var i=0; i<this.state.courses.length; i++){
+            if(this.state.courses[i].course_id == ind){
+                indx = i;
+            }
+        }
+        this.setState({courseIndex: indx, showCourseSelect: false, showAgeSelect: true});
+        getCourseObstacles(this.state.courses[indx].course_id).then(resp=>{
             convertObstacles(resp.data.obstacles).then(resp2=>{
                     this.setState({obstacles: resp2, resultsArr: resp.data.results});
             })
@@ -162,10 +168,20 @@ class ResultsEntry extends Component {
         });
     }
 
-    finalizeResults(){
-        postStandings(this.state.rankArr).then(resp=>{
-            console.log(resp);
-        });
+    functionThatUsesResolvedValues(val){
+        console.log(val);
+    }
+
+    async finalizeResults(){
+        var finalValue = {};
+        let resolvedFinalArray = await Promise.all(this.state.rankArr.map(async(value) => { // map instead of forEach
+            var points = this.state.rankArr.length - (value.rank - 1);
+            const result = await postStandings(value, this.state.courses[this.state.courseIndex], points);
+            console.log(result);
+            return result; // important to return the value
+        }));
+        var respArr = resolvedFinalArray;
+        this.setState({openFinalDialog: false, showCompetitors: false, ageMin: '', ageMax: ''});
     }
 
     goBack(){
@@ -210,7 +226,7 @@ class ResultsEntry extends Component {
                         <div className="subTitle">Please Select Your Competition Date</div>
                         <Row horizontal="spaced" wrap style={{marginTop: "20px"}}>
                             {this.state.courses.map((item, index) => (
-                                <div className="choiceBox" onClick={e=>this.setCourse(index)}>{item.comp_date.split("T")[0]}</div>
+                                <div className="choiceBox" onClick={e=>this.setCourse(item.course_id)}>{item.comp_date.split("T")[0]}</div>
                             ))}
                         </Row> </div>: null}
 
