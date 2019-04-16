@@ -17,22 +17,22 @@
   ],
   "undefined": [
     {
-      "id": 2,
+      "id": 3,
       "name": null,
       "file": "static/chunks/styles.js",
       "publicPath": "static/chunks/styles.js"
     },
     {
-      "id": 3,
+      "id": 4,
       "name": null,
       "file": "static/chunks/styles.js",
       "publicPath": "static/chunks/styles.js"
     }
   ],
-  "../style/results_entry.css": [
+  "../style/index.css": [
     {
-      "id": "./style/results_entry.css",
-      "name": "./style/results_entry.css",
+      "id": "./style/index.css",
+      "name": "./style/index.css",
       "file": "static/chunks/styles.js",
       "publicPath": "static/chunks/styles.js"
     }

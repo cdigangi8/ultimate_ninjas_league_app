@@ -77,3 +77,18 @@ export function postStandings(athlete, course, points){
     })
     return p;
 }
+
+export function getStandings(ageMin, ageMax, location){
+    const p = new Promise((res,reject)=>{
+        axios.get(`/api/get_standings`, {
+            params: {
+                ageMin: ageMin,
+                ageMax: ageMax,
+                location: location
+            }
+        }).then(resp=>{
+            res(resp);
+        }).catch(err=>reject(err)); 
+    })
+    return p;
+}

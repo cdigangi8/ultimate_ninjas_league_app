@@ -30,6 +30,13 @@ body{
     height: 100vh;
     overflow: auto;
 }
+.mainBack{
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/static/chicago_gym.jpg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    height: 100vh;
+    overflow: scroll;
+}
 
 .pageContainer{
     margin-left: 25px;
@@ -82,7 +89,7 @@ body{
   }
 
   .completed{
-    background-color: rgba(30, 197, 8, 0.459);
+    background-color: rgba(30, 197, 8, 0.5);
     color: #ffffff;
 }
 
@@ -134,7 +141,7 @@ body{
     margin-top: 25px;
     margin-bottom: 100px;
     color: #ffffff;
-    background-color: rgba(0, 92,180,0.8);
+    background-color: rgba(0, 92,180,0.9);
     width: 100%;
     border: none;
     border-radius: 3px;
@@ -149,5 +156,6 @@ body{
     color: rgb(0, 92,180);
     transition: 200ms;
 }
+
 
 /*# sourceMappingURL=styles.chunk.css.map*/

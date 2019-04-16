@@ -46,7 +46,8 @@ class ResultsEntry extends Component {
         openDialog: false,
         resultsArr: [],
         rankArr: [],
-        openFinalDialog: false
+        openFinalDialog: false,
+        completedCount: 0
     };
 
     handleChange = name => event => {
@@ -82,7 +83,7 @@ class ResultsEntry extends Component {
         this.setState({ageMin: min, ageMax: max, showCompetitors: true});
         rankFunction(this.state.resultsArr, this.state.athletes, min, max).then(resp=>{
             console.log(resp);
-            this.setState({rankArr: resp});
+            this.setState({rankArr: resp.array, completedCount: resp.completedCount});
         })
     }
 
@@ -161,7 +162,7 @@ class ResultsEntry extends Component {
                 resetObstacleArr(this.state.obstacles).then(resp3=>{
                     rankFunction(resp2.data.results, this.state.athletes, this.state.ageMin, this.state.ageMax).then(resp4=>{
                         this.setState({showScorecard: false, showCompetitors: true, currentAthlete: '', openDialog: false, showAgeSelect: true, 
-                                tieBreakMin: '', tieBreakSec: '', tieBreakMs: '', tiebreakerOb: '', obstacles: resp3, rankArr: resp4, resultsArr: resp2.data.results});
+                                tieBreakMin: '', tieBreakSec: '', tieBreakMs: '', tiebreakerOb: '', obstacles: resp3, rankArr: resp4.array, completedCount: resp4.completedCount, resultsArr: resp2.data.results});
                     });
                 });
             });
@@ -175,7 +176,12 @@ class ResultsEntry extends Component {
     async finalizeResults(){
         var finalValue = {};
         let resolvedFinalArray = await Promise.all(this.state.rankArr.map(async(value) => { // map instead of forEach
-            var points = this.state.rankArr.length - (value.rank - 1);
+            var points;
+            if(value.points < 1 && value.resultStr == '[]'){
+                points = 0;
+            }else{
+                points = this.state.rankArr.length - (value.rank - 1);
+            }
             const result = await postStandings(value, this.state.courses[this.state.courseIndex], points);
             console.log(result);
             return result; // important to return the value
@@ -224,9 +230,9 @@ class ResultsEntry extends Component {
                         {this.state.showCourseSelect == true ?
                         <div>
                         <div className="subTitle">Please Select Your Competition Date</div>
-                        <Row horizontal="spaced" wrap style={{marginTop: "20px"}}>
+                        <Row horizontal="start" wrap style={{marginTop: "20px"}}>
                             {this.state.courses.map((item, index) => (
-                                <div className="choiceBox" onClick={e=>this.setCourse(item.course_id)}>{item.comp_date.split("T")[0]}</div>
+                                <div className="choiceBox" style={{margin: "5px"}} onClick={e=>this.setCourse(item.course_id)}>{item.comp_date.split("T")[0]}</div>
                             ))}
                         </Row> </div>: null}
 
@@ -257,17 +263,19 @@ class ResultsEntry extends Component {
                         })}
                         </Column>
                         <Row horiozontal="center">
-                        <button className='submitBtn' onClick={ e => this.confirmSubmission('results')}>Submit</button>
+                        {this.state.completedCount == this.state.rankArr.length ? 
+                        <button className='submitBtn' onClick={ e => this.confirmSubmission('results')}>Submit</button> : null} 
                         </Row> </div>: null}
 
                         {this.state.showScorecard == true ?
                         <div>
                         <div className="subTitle">Scorecard</div>
-                        <Row horizontal="spaced" wrap style={{marginTop: "20px"}}>
+                        <Row horizontal="start" wrap style={{marginTop: "20px"}}>
                             <div>
                                 <div>Name:</div>
                                 <div className="scName">{this.state.rankArr[this.state.currentAthleteIndex].first_name + ' ' + this.state.rankArr[this.state.currentAthleteIndex].last_name}</div>
                             </div>
+                            <div align="middle" className="submitBtn" style={{width: "75px", marginLeft: "10px"}} onClick={e => this.confirmSubmission('scorecard')}>Absent</div>
                         </Row>
                         <Column horizontal="center">
                         {this.state.obstacles.map((item, index) => {

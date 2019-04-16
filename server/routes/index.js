@@ -67,6 +67,20 @@ router.get('/get_obstacles', function(req, res){
   });
 });
 
+router.get('/get_standings', function(req, res){
+  var con = openConnection();
+  var ageMax = parseInt(req.query.ageMax) + 1;
+  var sql = "SELECT * FROM yl_standings ys \
+              INNER JOIN yl_competitors ycomp\
+              ON ys.athlete_id = ycomp.athlete_id\
+              and ycomp.age >= " + req.query.ageMin + " and ycomp.age < " + ageMax + " and ycomp.location= " + req.query.location + " and ys.yl_id = (select yl_id from yl_sessions where current_session=1)\
+              order by Points desc";
+    sqlReq(con,sql).then(resp=>{
+      con.end();
+      res.json({'standings': resp});
+    });
+});
+
 router.post('/add_competitor', function(req, res){
     var con = openConnection();
     console.log(req.body.params);

@@ -164,7 +164,7 @@ function rankArrFunc(arr){
 
 export function rankFunction(results, athletes, ageMin, ageMax){
     const p = new Promise((res,reject)=>{
-
+        var completedCount = 0;
         var kidArray = getAgeArray(athletes, ageMin,ageMax);
         for(var a=0; a<kidArray.length; a++){
             var resultMatch = checkResult(results, kidArray[a].athlete_id);
@@ -176,6 +176,7 @@ export function rankFunction(results, athletes, ageMin, ageMax){
                         kidArray[a].tieTime = results[i].tiebreaker_time;
                         kidArray[a].resultStr = results[i].result_string;
                         kidArray[a].completed = true;
+                        completedCount += 1;
                         break;
                     }
                 }
@@ -191,7 +192,7 @@ export function rankFunction(results, athletes, ageMin, ageMax){
         }
         var rankArray = rankArrFunc(kidArray);
         rankArray.sort(compare);
-        res(rankArray);
+        res({array: rankArray, completedCount: completedCount});
     })
     return p;
 }
