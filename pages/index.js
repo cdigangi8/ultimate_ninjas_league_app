@@ -344,7 +344,7 @@ class YlLeaderboard extends Component {
           <span className="toolbarBtn">
             <FontAwesomeIcon onClick={this.handleDrawer} icon="bars"/>
             </span>
-            <span style={{marginLeft: "20px", fontWeight: "bold"}}>Options</span>
+            <span style={{marginLeft: "20px", fontWeight: "bold", color: "rgb(62, 105, 154)"}}>Options</span>
           </div>
           <Column className="optionSection">
           <Row vertical="center" className="titleRow">
@@ -535,7 +535,7 @@ class YlLeaderboard extends Component {
                                     <Row horizontal='space-around' vertical='center'>
                                         <div>{item.rank}.</div>
                                         <div>{item.first_name + ' ' + item.last_name.substring(0,1)}</div>
-                                        <div><div>{item.points}</div><div style={{fontSize: ".8em", color: "#979797"}}>Pts.</div></div>
+                                        <div><div>{item.points}</div><div style={{fontSize: ".8em", color: "rgb(225,225,225)"}}>Pts.</div></div>
                                     </Row>
                                 </div>
                             }
@@ -551,7 +551,7 @@ class YlLeaderboard extends Component {
                                     <Row horizontal='space-around' vertical='center'>
                                         <div>{index + 1}.</div>
                                         <div>{item.first_name + ' ' + item.last_name.substring(0,1)}</div>
-                                        <div><div>{item.Points}</div><div style={{fontSize: ".8em", color: "#979797"}}>Pts.</div></div>
+                                        <div><div>{item.Points}</div><div style={{fontSize: ".8em", color: "rgb(225,225,225)"}}>Pts.</div></div>
                                     </Row>
                                 </div>
                         })}

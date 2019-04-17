@@ -49313,7 +49313,8 @@ function (_Component) {
       })), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("span", {
         style: {
           marginLeft: "20px",
-          fontWeight: "bold"
+          fontWeight: "bold",
+          color: "rgb(62, 105, 154)"
         }
       }, "Options")), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_27__["Column"], {
         className: "optionSection"
@@ -49519,7 +49520,7 @@ function (_Component) {
           }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, item.rank, "."), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, item.first_name + ' ' + item.last_name.substring(0, 1)), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, item.points), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
             style: {
               fontSize: ".8em",
-              color: "#979797"
+              color: "rgb(225,225,225)"
             }
           }, "Pts."))));
         }
@@ -49543,7 +49544,7 @@ function (_Component) {
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, index + 1, "."), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, item.first_name + ' ' + item.last_name.substring(0, 1)), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, item.Points), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
           style: {
             fontSize: ".8em",
-            color: "#979797"
+            color: "rgb(225,225,225)"
           }
         }, "Pts."))));
       })), " ") : null)));
