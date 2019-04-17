@@ -45,59 +45,59 @@ import { faListOl, faBars, faMapMarkerAlt, faHashtag, faCalendarDay } from '@for
 library.add(faListOl, faBars, faMapMarkerAlt, faHashtag, faCalendarDay);
 
 
-const drawerWidth = 260;
+// const drawerWidth = 300;
 
-const styles = theme => ({
-  root: {
-    display: 'flex',
-  },
+// const styles = theme => ({
+//   root: {
+//     display: 'flex',
+//   },
 
-  menuButton: {
-    marginLeft: 12,
-    marginRight: 36,
-  },
-  hide: {
-    display: 'none',
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-    whiteSpace: 'nowrap',
-  },
-  drawerOpen: {
-    width: drawerWidth,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  drawerClose: {
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    overflowX: 'hidden',
-    width: theme.spacing.unit * 7 + 1,
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing.unit * 9 + 1,
-    },
-  },
-  toolbar: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: '0 8px',
-    ...theme.mixins.toolbar,
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing.unit * 3,
-  },
-activeListItem:{
-    backgroundColor: "rgba(0,90,180,0.5)",
-    color: "#ffffff"
-}
-});
+//   menuButton: {
+//     marginLeft: 12,
+//     marginRight: 36,
+//   },
+//   hide: {
+//     display: 'none',
+//   },
+//   drawer: {
+//     width: drawerWidth,
+//     flexShrink: 0,
+//     whiteSpace: 'nowrap',
+//   },
+//   drawerOpen: {
+//     width: drawerWidth,
+//     transition: theme.transitions.create('width', {
+//       easing: theme.transitions.easing.sharp,
+//       duration: theme.transitions.duration.enteringScreen,
+//     }),
+//   },
+//   drawerClose: {
+//     transition: theme.transitions.create('width', {
+//       easing: theme.transitions.easing.sharp,
+//       duration: theme.transitions.duration.leavingScreen,
+//     }),
+//     overflowX: 'hidden',
+//     width: theme.spacing.unit * 7 + 1,
+//     [theme.breakpoints.up('sm')]: {
+//       width: theme.spacing.unit * 7 + 1,
+//     },
+//   },
+//   toolbar: {
+//     display: 'flex',
+//     alignItems: 'center',
+//     justifyContent: 'flex-end',
+//     padding: '0 8px',
+//     ...theme.mixins.toolbar,
+//   },
+//   content: {
+//     flexGrow: 1,
+//     padding: theme.spacing.unit * 3,
+//   },
+// activeListItem:{
+//     backgroundColor: "rgba(0,90,180,0.5)",
+//     color: "#ffffff"
+// }
+// });
 
 class YlLeaderboard extends Component {
 
@@ -198,13 +198,13 @@ class YlLeaderboard extends Component {
     }
 
     render(){
-        const { classes, theme } = this.props;
+        // const { classes, theme } = this.props;
 
     return <div className="mainBack">
         <UNHeader title='Youth League Results' link='' linkTitle=''></UNHeader>
 
-        <Row style={{height: "100vh", overflow: "auto"}}>
-        <div id="drawer-container" style={{position: "relative"}}>
+        <Row>
+        {/* <div id="drawer-container" style={{position: "relative"}}>
         <CssBaseline />
         <Drawer
           variant="permanent"
@@ -304,7 +304,193 @@ class YlLeaderboard extends Component {
           </List>
           :null}
         </Drawer>
+        </div> */}
+
+
+<div id="drawer-container" style={{position: "relative"}}>
+        <CssBaseline />
+        {/* <Drawer
+          variant="permanent"
+          PaperProps={{ style: { position: 'absolute' } }}
+          ModalProps={{
+            style: { position: 'absolute'}
+          }}
+          className={classNames('drawer', {
+            'drawerOpen': this.state.open,
+            'drawerClose': !this.state.open,
+          })}
+          classes={{
+            paper: classNames({
+                'drawerOpen': this.state.open,
+              'drawerClose': !this.state.open,
+            }),
+          }}
+          open={this.state.open}
+        > */}
+        <div
+          className={classNames('drawer', {
+            'drawerOpen': this.state.open,
+            'drawerClose': !this.state.open,
+          })}
+          classes={{
+            paper: classNames({
+                'drawerOpen': this.state.open,
+              'drawerClose': !this.state.open,
+            }),
+          }}
+          open={this.state.open}
+        >
+          <div className='toolbar'>
+          <span className="toolbarBtn">
+            <FontAwesomeIcon onClick={this.handleDrawer} icon="bars"/>
+            </span>
+            <span style={{marginLeft: "20px", fontWeight: "bold"}}>Options</span>
+          </div>
+          <Column className="optionSection">
+          <Row vertical="center" className="titleRow">
+                <div className="titleIcon"><FontAwesomeIcon icon="list-ol"/></div>
+                <div className="titleText">Standings</div>
+            </Row>
+            <Row vertical="center" onClick={e=>this.setStandings('season')} className={this.state.standingsView == 'season' ? 'activeListItem optionRow' : 'optionRow'}>
+                <div className="optionLetterIcon">S</div>
+                <div className="optionText">Season Standings</div>
+            </Row>
+            <Row vertical="center" onClick={e=>this.setStandings('individual')} className={this.state.standingsView == 'individual' ? 'activeListItem optionRow' : 'optionRow'}>
+                <div className="optionLetterIcon">I</div>
+                <div className="optionText">Individual Competition</div>
+            </Row>
+            </Column>
+          {/* <List>
+            <ListItem>
+                <ListItemIcon><FontAwesomeIcon icon="list-ol"/></ListItemIcon>
+                <ListItemText>Standings</ListItemText>
+            </ListItem>
+            <ListItem button onClick={e=>this.setStandings('season')} className={this.state.standingsView == 'season' ? 'activeListItem' : null}>
+            <ListItemIcon align="middle" style={{marginLeft: "10px", backgroundColor: "rgb(230,230,230)", height: "35px", width: "35px", borderRadius: "50%", padding: "8px 15px"}}>S</ListItemIcon>
+                <ListItemText>Season Standings</ListItemText>
+            </ListItem>
+            <ListItem button onClick={e=>this.setStandings('individual')} className={this.state.standingsView == 'individual' ? 'activeListItem' : null}>
+                <ListItemIcon align="middle" style={{marginLeft: "10px", backgroundColor: "rgb(230,230,230)", height: "35px", width: "35px", borderRadius: "50%", padding: "8px 15px"}}>I</ListItemIcon>
+                <ListItemText>Individual Competition</ListItemText>
+            </ListItem>
+          </List> */}
+
+            <Column className="optionSection">
+                <Row vertical="center" className="titleRow">
+                        <div className="titleIcon"><FontAwesomeIcon icon="map-marker-alt"/></div>
+                        <div className="titleText">Location</div>
+                    </Row>
+                    <Row vertical="center" onClick={e=>this.setLocation(1)} className={this.state.location == '1' ? 'activeListItem optionRow' : 'optionRow'}>
+                        <div className="optionLetterIcon">C</div>
+                        <div className="optionText">Chicago</div>
+                    </Row>
+                    <Row vertical="center" onClick={e=>this.setLocation(2)} className={this.state.location == '2' ? 'activeListItem optionRow' : 'optionRow'}>
+                        <div className="optionLetterIcon">N</div>
+                        <div className="optionText">Naperville</div>
+                    </Row>
+                    <Row vertical="center" onClick={e=>this.setLocation(3)} className={this.state.location == '3' ? 'activeListItem optionRow' : 'optionRow'}>
+                        <div className="optionLetterIcon">L</div>
+                        <div className="optionText">Libertyville</div>
+                    </Row>
+                </Column>
+          {/* <List>
+            <ListItem>
+                <ListItemIcon><FontAwesomeIcon icon="map-marker-alt"/></ListItemIcon>
+                <ListItemText>Location</ListItemText>
+            </ListItem>
+            <ListItem button onClick={e=>this.setLocation(1)} className={this.state.location == '1' ? 'activeListItem' : null}>
+            <ListItemIcon align="middle" style={{marginLeft: "10px", backgroundColor: "rgb(230,230,230)", height: "35px", width: "35px", borderRadius: "50%", padding: "8px 12px"}}>C</ListItemIcon>
+                <ListItemText>Chicago</ListItemText>
+            </ListItem>
+            <ListItem button onClick={e=>this.setLocation(2)} className={this.state.location == '2' ? 'activeListItem' : null}>
+            <ListItemIcon align="middle" style={{marginLeft: "10px", backgroundColor: "rgb(230,230,230)", height: "35px", width: "35px", borderRadius: "50%", padding: "8px 12px"}}>N</ListItemIcon>
+                <ListItemText>Naperville</ListItemText>
+            </ListItem>
+            <ListItem button onClick={e=>this.setLocation(3)} className={this.state.location == '3' ? 'activeListItem' : null}>
+            <ListItemIcon align="middle" style={{marginLeft: "10px", backgroundColor: "rgb(230,230,230)", height: "35px", width: "35px", borderRadius: "50%", padding: "8px 12px"}}>L</ListItemIcon>
+                <ListItemText>Libertyville</ListItemText>
+            </ListItem>
+          </List>
+          <Divider /> */}
+          {this.state.showCourseSelect == true ?
+            <Column className="optionSection">
+            <Row vertical="center" className="titleRow">
+                    <div className="titleIcon"><FontAwesomeIcon icon="calendar-day"/></div>
+                    <div className="titleText">Competition Date</div>
+                </Row>
+                {this.state.courses.map((item, index) => (
+                    <Row vertical="center" onClick={e=>this.setCourse(index)} className={this.state.compDate == item.comp_date.split("T")[0] ? 'activeListItem optionRow' : 'optionRow'}>
+                        <div className="optionLetterIcon">{index + 1}</div>
+                        <div className="optionText">{item.comp_date.split("T")[0]}</div>
+                    </Row>
+                ))}
+            </Column>
+        //     <List>
+        //         <ListItem>
+        //             <ListItemIcon><FontAwesomeIcon icon="calendar-day"/></ListItemIcon>
+        //             <ListItemText>Competition Date</ListItemText>
+        //         </ListItem>
+        //         {this.state.courses.map((item, index) => (
+        //         <ListItem button onClick={e=>this.setCourse(index)} className={this.state.compDate == item.comp_date.split("T")[0] ? 'activeListItem' : null}>
+        //             <ListItemIcon align="middle" style={{marginLeft: "10px", backgroundColor: "rgb(230,230,230)", height: "35px", width: "35px", borderRadius: "50%", padding: "8px 12px"}}>{index + 1}</ListItemIcon>
+        //             <ListItemText>{item.comp_date.split("T")[0]}</ListItemText>
+        //         </ListItem>
+        //         ))}
+        //     </List>
+          :null}
+           {/* <Divider /> */}
+          {this.state.showAgeSelect == true ?
+
+            <Column className="optionSection">
+            <Row vertical="center" className="titleRow">
+                    <div className="titleIcon"><FontAwesomeIcon icon="hashtag"/></div>
+                    <div className="titleText">Age Group</div>
+                </Row>
+                <Row vertical="center" onClick={e=>this.setAgeGroup(6,8)} className={this.state.ageMax == 8 ? 'activeListItem optionRow' : 'optionRow'}>
+                    <div className="optionLetterIcon">1</div>
+                    <div className="optionText">Ages 6-8</div>
+                </Row>
+                <Row vertical="center" onClick={e=>this.setAgeGroup(9,10)} className={this.state.ageMax == 10 ? 'activeListItem optionRow' : 'optionRow'}>
+                    <div className="optionLetterIcon">2</div>
+                    <div className="optionText">Ages 9-10</div>
+                </Row>
+                <Row vertical="center" onClick={e=>this.setAgeGroup(11,12)} className={this.state.ageMax == 12 ? 'activeListItem optionRow' : 'optionRow'}>
+                    <div className="optionLetterIcon">3</div>
+                    <div className="optionText">Ages 11-12</div>
+                </Row>
+                <Row vertical="center" onClick={e=>this.setAgeGroup(13,16)} className={this.state.ageMax == 16 ? 'activeListItem optionRow' : 'optionRow'}>
+                    <div className="optionLetterIcon">4</div>
+                    <div className="optionText">Ages 13-16</div>
+                </Row>
+            </Column>
+
+        //     <List>
+        //     <ListItem>
+        //         <ListItemIcon><FontAwesomeIcon icon="hashtag"/></ListItemIcon>
+        //         <ListItemText>Age Group</ListItemText>
+        //     </ListItem>
+        //     <ListItem button onClick={e=>this.setAgeGroup(6,8)} className={this.state.ageMax == 8 ? 'activeListItem' : null}>
+        //     <ListItemIcon align="middle" style={{marginLeft: "10px", backgroundColor: "rgb(230,230,230)", height: "35px", width: "35px", borderRadius: "50%", padding: "8px 12px"}}>1</ListItemIcon>
+        //         <ListItemText>Ages 6-8</ListItemText>
+        //     </ListItem>
+        //     <ListItem button onClick={e=>this.setAgeGroup(9,10)} className={this.state.ageMax == 10 ? 'activeListItem' : null}>
+        //     <ListItemIcon align="middle" style={{marginLeft: "10px", backgroundColor: "rgb(230,230,230)", height: "35px", width: "35px", borderRadius: "50%", padding: "8px 12px"}}>2</ListItemIcon>
+        //         <ListItemText>Ages 9-10</ListItemText>
+        //     </ListItem>
+        //     <ListItem button onClick={e=>this.setAgeGroup(11,12)} className={this.state.ageMax == 12 ? 'activeListItem' : null}>
+        //     <ListItemIcon align="middle" style={{marginLeft: "10px", backgroundColor: "rgb(230,230,230)", height: "35px", width: "35px", borderRadius: "50%", padding: "8px 12px"}}>3</ListItemIcon>
+        //         <ListItemText>Ages 11-12</ListItemText>
+        //     </ListItem>
+        //     <ListItem button onClick={e=>this.setAgeGroup(13,16)} className={this.state.ageMax == 16 ? 'activeListItem' : null}>
+        //     <ListItemIcon align="middle" style={{marginLeft: "10px", backgroundColor: "rgb(230,230,230)", height: "35px", width: "35px", borderRadius: "50%", padding: "8px 12px"}}>4</ListItemIcon>
+        //         <ListItemText>Ages 13-16</ListItemText>
+        //     </ListItem>
+        //   </List>
+          :null}
         </div>
+        </div>
+
+
                     <div className="pageContainer">
                     {/* <div>
                     <Row horizontal="start" wrap style={{marginTop: "10px"}}>
@@ -386,9 +572,10 @@ class YlLeaderboard extends Component {
   }
   
 
-  YlLeaderboard.propTypes = {
-    classes: PropTypes.object.isRequired,
-    theme: PropTypes.object.isRequired,
-  };
+//   YlLeaderboard.propTypes = {
+//     classes: PropTypes.object.isRequired,
+//     theme: PropTypes.object.isRequired,
+//   };
 
-  export default withStyles(styles, { withTheme: true })(YlLeaderboard);
+//   export default withStyles(styles, { withTheme: true })(YlLeaderboard);
+export default YlLeaderboard;

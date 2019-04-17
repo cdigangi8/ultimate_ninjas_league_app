@@ -42,7 +42,9 @@ body{
     margin-left: 25px;
     margin-right: 25px;
     width: 100%;
-    margin-bottom: 100px;
+    height: calc(100vh - 135px);
+    overflow: auto;
+    padding-bottom: 100px;
 }
 
 .subTitle{
@@ -157,5 +159,97 @@ body{
     transition: 200ms;
 }
 
+
+  .root {
+    display: flex,
+  }
+
+  .menuButton {
+    margin-left: 12px;
+    margin-right: 36px;
+  }
+
+  .hide {
+    display: none;
+  }
+  .drawer {
+    width: 300px;
+    flex-shrink: 0;
+    white-space: nowrap;
+    background-color: #ffffff;
+    overflow-x: hidden;
+    height: calc(100vh - 135px);
+  }
+  .drawerOpen {
+    width: 300px;
+    transition: .5s ease;
+  }
+  .drawerClose {
+    width: 65px;
+    transition: .5s ease;
+    overflow-x: hidden,
+  }
+  .toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 8px;
+    border-bottom: 1px solid rgb(230,230,230);
+  }
+  .content {
+    flex-grow: 1;
+    padding: 3px;
+  }
+.activeListItem{
+    background-color: rgba(0,90,180,0.5);
+    color: #ffffff;
+}
+
+.toolbarBtn{
+    padding: 5px;
+    font-size: 24px;
+    cursor: pointer;
+    margin: 5px;
+    border-radius: 3px;
+}
+
+.toolbarBtn:hover{
+    background-color: rgb(230,230,230);
+}
+
+.titleRow{
+    padding: 15px 20px;
+}
+.titleIcon{
+    font-size: 18px;
+    color: rgb(75,75,75);
+}
+.titleText{
+    margin-left: 30px;
+}
+.optionRow{
+    padding: 10px 20px;
+    cursor: pointer;
+}
+.optionRow:hover{
+    background-color: rgb(230,230,230);
+}
+.optionLetterIcon{
+    margin-left: 10px;
+    background-color: rgb(230,230,230);
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    padding: 5px 9px;
+    font-size: 12px;
+}
+.optionText{
+    margin-left: 25px;
+}
+
+.optionSection{
+    border-bottom: 1px solid rgb(230,230,230);
+    padding-bottom: 10px;
+}
 
 /*# sourceMappingURL=styles.chunk.css.map*/
