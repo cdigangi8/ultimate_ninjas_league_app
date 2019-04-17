@@ -531,7 +531,7 @@ class YlLeaderboard extends Component {
                         {this.state.rankArr.map((item, index) => {
                             if(item.age >= this.state.ageMin && item.age < this.state.ageMax+1){
                                 // return <div className={item.completed == true ? "athleteBox completed" : "athleteBox"}>
-                                return <div className="athleteBox">
+                                return <div className="athleteStandingsBox">
                                     <Row horizontal='space-around' vertical='center'>
                                         <div>{item.rank}.</div>
                                         <div>{item.first_name + ' ' + item.last_name.substring(0,1)}</div>
@@ -547,7 +547,7 @@ class YlLeaderboard extends Component {
                         <div className="subTitle" style={{color: "#ffffff"}}>Standings</div>
                         <Column horizontal="spaced" wrap style={{marginTop: "20px"}}>
                         {this.state.rankArr.map((item, index) => {
-                                return <div className="athleteBox">
+                                return <div className="athleteStandingsBox">
                                     <Row horizontal='space-around' vertical='center'>
                                         <div>{index + 1}.</div>
                                         <div>{item.first_name + ' ' + item.last_name.substring(0,1)}</div>
