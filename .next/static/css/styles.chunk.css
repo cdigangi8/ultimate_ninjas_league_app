@@ -74,7 +74,7 @@ body{
 }
 
 .athleteBox{
-    background-color: rgba(125, 199, 56, 0.9);
+    background-color: #ffffff;
     border: #979797;
     cursor: pointer;
     padding: 10px;
@@ -83,13 +83,11 @@ body{
     transition: 0.3s;
     margin-top: 10px;
     font-size: 1.5em;
-    color: rgb(255,255,255);
-    font-weight: bold;
 }
 
 .athleteBox:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    background-color: rgba(165, 239, 96, 0.9);
+    background-color: rgb(230,230,230);
   }
 
   .completed{
@@ -230,7 +228,7 @@ body{
 }
 .titleText{
     margin-left: 30px;
-    color: rgb(122, 165, 214);
+    color: rgb(162, 205, 254);
 }
 .optionRow{
     padding: 10px 20px;
@@ -250,12 +248,31 @@ body{
 }
 .optionText{
     margin-left: 25px;
-    color: rgb(122, 165, 214);
+    color: rgb(162, 205, 254);
 }
 
 .optionSection{
     border-bottom: 1px solid rgb(22, 65, 114);
     padding-bottom: 10px;
 }
+
+.athleteStandingsBox{
+    background-color: rgba(125, 199, 56, 0.9);
+    border: #979797;
+    cursor: pointer;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    margin-top: 10px;
+    font-size: 1.5em;
+    color: rgb(255,255,255);
+    font-weight: bold;
+}
+
+.athleteStandingsBox:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    background-color: rgba(165, 239, 96, 0.9);
+  }
 
 /*# sourceMappingURL=styles.chunk.css.map*/

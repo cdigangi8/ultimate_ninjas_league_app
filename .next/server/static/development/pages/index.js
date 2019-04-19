@@ -1523,7 +1523,7 @@ function (_Component) {
         if (item.age >= _this6.state.ageMin && item.age < _this6.state.ageMax + 1) {
           // return <div className={item.completed == true ? "athleteBox completed" : "athleteBox"}>
           return react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
-            className: "athleteBox"
+            className: "athleteStandingsBox"
           }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_27__["Row"], {
             horizontal: "space-around",
             vertical: "center"
@@ -1547,7 +1547,7 @@ function (_Component) {
         }
       }, this.state.rankArr.map(function (item, index) {
         return react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
-          className: "athleteBox"
+          className: "athleteStandingsBox"
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_27__["Row"], {
           horizontal: "space-around",
           vertical: "center"
