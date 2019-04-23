@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import UNHeader from "../components/header";
 import '../style/results_entry.css';
-import {getCompInfo, getCourseObstacles, postScorecard, postStandings} from '../api/api';
-import {convertObstacles, calculateScore, resetObstacleArr,rankFunction} from '../controllers/controllers';
+import {getCompInfo, getCourseObstacles, postScorecard, postStandings, postUpdatedScorecard} from '../api/api';
+import {convertObstacles, calculateScore, resetObstacleArr,rankFunction, checkActiveScorecard} from '../controllers/controllers';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -20,6 +20,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import { Column, Row } from 'simple-flexbox';
 import {addCompetitor} from '../api/api';
+import Stopwatch from '../components/StopWatch';
+import timeFormat from '../controllers/timeFormat';
 
 class ResultsEntry extends Component {
 
@@ -47,7 +49,16 @@ class ResultsEntry extends Component {
         resultsArr: [],
         rankArr: [],
         openFinalDialog: false,
-        completedCount: 0
+        completedCount: 0,
+        errorDialog: false,
+        errorMsg: '',
+        existingScorecard: false,
+        obstacleIndex: 0,
+        editTime: false,
+        editTimeMin: '',
+        editTimeSec: '',
+        editTimeMS: '',
+        editTimeOb: 0,
     };
 
     handleChange = name => event => {
@@ -89,12 +100,16 @@ class ResultsEntry extends Component {
 
     setScorecard(athlete){
         var elementPos = this.state.rankArr.map(function(x) {return x.athlete_id; }).indexOf(athlete);
-        this.setState({currentAthleteIndex: elementPos,currentAthlete: athlete, showCompetitors: false, showAgeSelect: false, showScorecard: true})
+        checkActiveScorecard(this.state.resultsArr, this.state.obstacles, athlete).then(resp=>{
+            console.log(resp);
+            this.setState({currentAthleteIndex: elementPos,currentAthlete: athlete, showCompetitors: false, 
+                showAgeSelect: false, showScorecard: true, obstacles: resp.obstacles, tieBreakMin: resp.min, tieBreakSec: resp.sec,
+                tieBreakMs: resp.ms, existingScorecard: resp.existingScorecard, obstacleIndex: 0});
+        })
     }
 
     createPointRow(item){
         let table = []
-
     for (let i = 0; i < item.choices.length; i++) {
       table.push(<div className={item.choices[i].selected == true ? "obstacleBoxContent activeBox" : "obstacleBoxContent"} onClick={e=>this.addPoints(item, item.choices[i].key)}>{item.choices[i].value}</div>)
     }
@@ -104,39 +119,69 @@ class ResultsEntry extends Component {
     checkTie(){
         var tie = false;
         var tieOB;
+        var tieMin = '';
+        var tieSec = '';
+        var tieMS = '';
         this.state.obstacles.forEach((item,index)=>{
             for(var i=0; i<item.choices.length; i++){
                 if(tie==false && i !== (item.choices.length-1) && item.choices[i].selected == true){
                     tie = true;
                     tieOB = item.obOrder;
-                    this.setState({tiebreakerOb: tieOB});
+                    if(index>0 && this.state.obstacles[index-1].time != ''){
+                        tieMin = this.state.obstacles[index-1].time.split(":")[1];
+                        tieSec = this.state.obstacles[index-1].time.split(":")[2].split('.')[0];
+                        tieMS = this.state.obstacles[index-1].time.split(":")[2].split('.')[1];
+                    }else if(index == 0 && item.time !=''){
+                        tieMin = item.time.split(":")[1];
+                        tieSec = item.time.split(":")[2].split('.')[0];
+                        tieMS = item.time.split(":")[2].split('.')[1];
+                    }
+                    this.setState({tiebreakerOb: tieOB, tieBreakMin: tieMin, tieBreakSec: tieSec, tieBreakMs: tieMS});
+                    break;
                 }
             }
             if(tie == false){
-                this.setState({tiebreakerOb: ""});
+                if(this.state.obstacles[this.state.obstacles.length - 1].time != ''){
+                    tieMin = item.time.split(":")[1];
+                    tieSec = item.time.split(":")[2].split('.')[0];
+                    tieMS = item.time.split(":")[2].split('.')[1];
+                }
+                this.setState({tiebreakerOb: "", tieBreakMin: tieMin, tieBreakSec: tieSec, tieBreakMs: tieMS});
             }
         });
     }
 
     convertTime(min, sec, ms){
-        if(min < 10){
+        console.log(min);
+        console.log(sec);
+        console.log(ms);
+        if(parseInt(min) < 10 && min !== '00'){
             min = '0' + min;
+        }else if(min ==''){
+            min = "00";
         }
-        if(sec < 10){
+        if(parseInt(sec) < 10 && sec !== '00'){
             sec = '0' + sec;
+        }else if(sec ==''){
+            sec = "00";
         }
-        if(ms < 10){
+        if(parseInt(ms) < 10 && ms !== '00'){
             ms = '0' + ms;
+        }else if(ms ==''){
+            ms = "00";
         }
         return '00' + ':' + min + ':' + sec + '.' + ms;
       }
 
-    addPoints(item, c_id){
+    addPoints(item, c_id, time){
         for(var i=0; i<item.choices.length;i++){
             if(item.choices[i].key != c_id){
                 item.choices[i].selected = false;
             }else{
                 item.choices[i].selected = true;
+                if(time){
+                    item.time = timeFormat( time );
+                }
                 this.checkTie();
             }
         }
@@ -153,19 +198,58 @@ class ResultsEntry extends Component {
 
     submitScorecard(){
         var tiebreakTime = this.convertTime(this.state.tieBreakMin, this.state.tieBreakSec, this.state.tieBreakMs);
-        console.log(tiebreakTime);
         calculateScore(this.state.obstacles).then(resp=>{
             var points = resp.score;
             var resultString = resp.resStr;
-            postScorecard(this.state.currentAthlete, this.state.courses[this.state.courseIndex].course_id, points, this.state.tiebreakerOb, tiebreakTime, resultString).then(resp2=>{
-                console.log(resp2);
-                resetObstacleArr(this.state.obstacles).then(resp3=>{
-                    rankFunction(resp2.data.results, this.state.athletes, this.state.ageMin, this.state.ageMax).then(resp4=>{
-                        this.setState({showScorecard: false, showCompetitors: true, currentAthlete: '', openDialog: false, showAgeSelect: true, 
-                                tieBreakMin: '', tieBreakSec: '', tieBreakMs: '', tiebreakerOb: '', obstacles: resp3, rankArr: resp4.array, completedCount: resp4.completedCount, resultsArr: resp2.data.results});
-                    });
+            if(resultString.length !== this.state.obstacles.length && resultString.length > 0){
+                this.setState({openDialog: false, errorDialog: true, errorMsg: "At least one obstacle is missing a point selection!"});
+            }else if(tiebreakTime == '00:00:00.00' && resultString.length > 0){
+                this.setState({openDialog: false, errorDialog: true, errorMsg: "Tiebreak time is zero and should have a value!"});
+            }else{
+                postScorecard(this.state.currentAthlete, this.state.courses[this.state.courseIndex].course_id, points, this.state.tiebreakerOb, tiebreakTime, JSON.stringify(resultString)).then(resp2=>{
+                    console.log(resp2);
+                    if("affectedRows" in  resp2.data.status){
+                        resetObstacleArr(this.state.obstacles).then(resp3=>{
+                            rankFunction(resp2.data.results, this.state.athletes, this.state.ageMin, this.state.ageMax).then(resp4=>{
+                                this.setState({showScorecard: false, showCompetitors: true, currentAthlete: '', openDialog: false, showAgeSelect: true, 
+                                        tieBreakMin: '', tieBreakSec: '', tieBreakMs: '', tiebreakerOb: '', obstacles: resp3, 
+                                        rankArr: resp4.array, completedCount: resp4.completedCount, resultsArr: resp2.data.results,
+                                        existingScorecard: false});
+                            });
+                        });
+                    }else{
+                        this.setState({openDialog: false, errorDialog: true, errorMsg: "No connection to the database! Please copy the results on paper and submit when internet is back online."});
+                    }
                 });
-            });
+            }
+        });
+    }
+
+    updateScorecard(){
+        var tiebreakTime = this.convertTime(this.state.tieBreakMin, this.state.tieBreakSec, this.state.tieBreakMs);
+        calculateScore(this.state.obstacles).then(resp=>{
+            var points = resp.score;
+            var resultString = resp.resStr;
+            if(resultString.length !== this.state.obstacles.length && resultString.length > 0){
+                this.setState({openDialog: false, errorDialog: true, errorMsg: "At least one obstacle is missing a point selection!"});
+            }else if(tiebreakTime == '00:00:00.00' && resultString.length > 0){
+                this.setState({openDialog: false, errorDialog: true, errorMsg: "Tiebreak time is zero and should have a value!"});
+            }else{
+                postUpdatedScorecard(this.state.currentAthlete, this.state.courses[this.state.courseIndex].course_id, points, this.state.tiebreakerOb, tiebreakTime, JSON.stringify(resultString)).then(resp2=>{
+                    if("affectedRows" in  resp2.data.status){
+                        resetObstacleArr(this.state.obstacles).then(resp3=>{
+                            rankFunction(resp2.data.results, this.state.athletes, this.state.ageMin, this.state.ageMax).then(resp4=>{
+                                this.setState({showScorecard: false, showCompetitors: true, currentAthlete: '', openDialog: false, showAgeSelect: true, 
+                                        tieBreakMin: '', tieBreakSec: '', tieBreakMs: '', tiebreakerOb: '', obstacles: resp3, 
+                                        rankArr: resp4.array, completedCount: resp4.completedCount, resultsArr: resp2.data.results,
+                                        existingScorecard: false});
+                            });
+                        });
+                    }else{
+                        this.setState({openDialog: false, errorDialog: true, errorMsg: "No connection to the database! Please copy the results on paper and submit when internet is back online."});
+                    }
+                });
+            }
         });
     }
 
@@ -174,16 +258,18 @@ class ResultsEntry extends Component {
     }
 
     async finalizeResults(){
-        var finalValue = {};
         let resolvedFinalArray = await Promise.all(this.state.rankArr.map(async(value) => { // map instead of forEach
-            var points;
+            // var points;
+            var rank;
             if(value.points < 1 && value.resultStr == '[]'){
-                points = 0;
+                // points = 0;
+                rank = 0;
             }else{
-                points = this.state.rankArr.length - (value.rank - 1);
+                // points = this.state.rankArr.length - (value.rank - 1);
+                rank = value.rank;
             }
-            const result = await postStandings(value, this.state.courses[this.state.courseIndex], points);
-            console.log(result);
+            // const result = await postStandings(value, this.state.courses[this.state.courseIndex], points);
+            const result = await postStandings(value, this.state.courses[this.state.courseIndex], rank);
             return result; // important to return the value
         }));
         var respArr = resolvedFinalArray;
@@ -193,7 +279,7 @@ class ResultsEntry extends Component {
     goBack(){
         if(this.state.showScorecard == true){
             resetObstacleArr(this.state.obstacles).then(resp=>{
-                this.setState({showScorecard: false, showCompetitors: true, currentAthlete: '', showAgeSelect: true, obstacles: resp})
+                this.setState({showScorecard: false, showCompetitors: true, currentAthlete: '', showAgeSelect: true, obstacles: resp, existingScorecard: false})
             });
         }else if(this.state.showCompetitors == true || this.state.showAgeSelect == true){
             this.setState({showCompetitors: false, ageMin: '', ageMax: '', showAgeSelect: false, showCourseSelect: true, obstacles: [], resultsArr: [] });
@@ -203,7 +289,31 @@ class ResultsEntry extends Component {
     }
 
     closeDialog = (type) =>{
-        this.setState({ openDialog: false, openFinalDialog: false });
+        this.setState({ openDialog: false, openFinalDialog: false, errorDialog: false, editTime: false });
+}
+
+myCallback = (time, obstacle)=>{
+    this.addPoints(this.state.obstacles[this.state.obstacleIndex], obstacle.key, time);
+    if(this.state.obstacleIndex < (this.state.obstacles.length-1)){
+        this.setState({obstacleIndex: this.state.obstacleIndex + 1});
+    }
+}
+
+editTimeFunc(time, ind){
+    var min = '';
+    var sec = '';
+    var ms = '';
+    if(time !=''){
+        var min = time.split(":")[1];
+        var sec = time.split(":")[2].split('.')[0];
+        var ms = time.split(":")[2].split('.')[1];
+    }
+    this.setState({editTime: true, editTimeMin: min, editTimeSec: sec, editTimeMS: ms, editTimeOb: ind});
+}
+submitNewTime(){
+    this.state.obstacles[this.state.editTimeOb].time = this.convertTime(this.state.editTimeMin, this.state.editTimeSec, this.state.editTimeMS);
+    this.setState({editTime: false, editTimeMin: '', editTimeSec: '', editTimeMS: ''});
+    this.checkTie();
 }
 
 
@@ -217,6 +327,7 @@ class ResultsEntry extends Component {
 
         <Row>
                     <div className="pageContainer">
+
                     {this.state.location !== '' ?
                     <div className="choiceBox" onClick={e=>this.goBack()}>Back</div>: null}
                     {this.state.showLocationSelect == true ?
@@ -269,6 +380,9 @@ class ResultsEntry extends Component {
 
                         {this.state.showScorecard == true ?
                         <div>
+                            <Row flexGrow={1} flexBasis='auto'>
+                        <div>
+                         <Column horizontal="start">
                         <div className="subTitle">Scorecard</div>
                         <Row horizontal="start" wrap style={{marginTop: "20px"}}>
                             <div>
@@ -277,12 +391,23 @@ class ResultsEntry extends Component {
                             </div>
                             <div align="middle" className="submitBtn" style={{width: "75px", marginLeft: "10px"}} onClick={e => this.confirmSubmission('scorecard')}>Absent</div>
                         </Row>
-                        <Column horizontal="center">
+                        </Column>   
+                        </div>
+
+                        <div style={{width: "100%"}}>
+                        <Column>
+                        {this.state.existingScorecard == false ? 
+                            <Stopwatch callbackFromParent={this.myCallback} choices={this.state.obstacles[this.state.obstacleIndex].choices} obstacle={this.state.obstacles[this.state.obstacleIndex].obstacle} obstacleInd={this.state.obstacleIndex} complete={this.state.scoreCardComplete} obstacleCnt={this.state.obstacles.length}/>
+                            : null}
+                        <Column horizontal="center" style={{marginTop: '35px'}}>
                         {this.state.obstacles.map((item, index) => {
                             return <div className="obstacleBox">
                             <div  className="obstacleBoxTitle">{item.obstacle}</div>
                             <Row horizontal="center">
                                 {this.createPointRow(item)}
+                            </Row>
+                            <Row horizontal='center' style={{padding: "5px", borderTop: "1px solid rgb(230,230,230)"}}><div>{item.time}</div>
+                            <div align="right" style={{fontSize: '11px', cursor: "pointer", marginLeft: '15px', color: "rgb(0,90,180)"}}><a onClick={e=> this.editTimeFunc(item.time, index)}>edit time</a></div>
                             </Row></div>
                             })}
                         </Column> 
@@ -303,7 +428,11 @@ class ResultsEntry extends Component {
                             </div>
                         </Row>
                         <Row horiozontal="center">
-                        <button className='submitBtn' onClick={ e => this.confirmSubmission('scorecard')}>Submit</button>
+                            {this.state.existingScorecard == false ? <button className='submitBtn' onClick={ e => this.confirmSubmission('scorecard')}>Submit</button>
+                             : <button className='updateBtn' onClick={ e => this.confirmSubmission('scorecard')}>Update</button>}
+                        </Row>
+                        </Column>
+                        </div>
                         </Row>
                         </div>: null}
                         
@@ -322,10 +451,62 @@ class ResultsEntry extends Component {
             </DialogContentText>
                     </DialogContent>
                     <DialogActions>
+                    {this.state.existingScorecard == false ?
                     <Button type='submit' onClick={e => this.submitScorecard()} color="primary">
                             Submit
-            </Button>
+                    </Button>
+                    :
+                    <Button type='submit' onClick={e => this.updateScorecard()} color="primary">
+                            Update
+                    </Button>
+                    }
                         <Button type='submit' onClick={this.closeDialog} color="default">
+                            Cancel
+            </Button>
+                    </DialogActions>
+                </Dialog>
+
+                <Dialog
+                    open={this.state.errorDialog}
+                    onClose={this.handleClose}
+                    aria-labelledby="form-dialog-title"
+                >
+                    <DialogTitle id="form-dialog-title">ERROR: {this.state.errorMsg}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            <span>Results NOT submitted.</span>
+            </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button type='submit' onClick={this.closeDialog} color="default">
+                            OK
+            </Button>
+                    </DialogActions>
+                </Dialog>
+
+                <Dialog
+                    open={this.state.editTime}
+                    onClose={this.handleClose}
+                    aria-labelledby="form-dialog-title"
+                >
+                    <DialogTitle id="form-dialog-title">Edit Time:</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            <div>Please enter the new time and hit Submit</div>
+                            <div style={{marginTop: "10px"}}>
+                                    <span><input style={{width: '50px'}} className='skillInput' type="number" placeholder="min" value={this.state.editTimeMin} onChange={this.handleChange('editTimeMin')}/></span>
+                                    <span style={{paddingLeft: '5px', paddingRight: '5px', fontSize: "18px", fontWeight: "bold"}}>:</span>
+                                    <span><input style={{width: '50px'}} className='skillInput' type="number" placeholder="sec" value={this.state.editTimeSec} onChange={this.handleChange('editTimeSec')}/></span>
+                                    <span style={{paddingLeft: '5px', paddingRight: '5px', fontSize: "18px", fontWeight: "bold"}}>:</span>
+                                    <span><input style={{width: '50px'}} className='skillInput' type="number" placeholder="ms" value={this.state.editTimeMS} onChange={this.handleChange('editTimeMS')}/></span>
+                                </div>
+            </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button type='submit' onClick={e=> this.submitNewTime()} color="default">
+                            Submit
+            </Button>
+            <Button type='submit' onClick={this.closeDialog} color="default">
                             Cancel
             </Button>
                     </DialogActions>

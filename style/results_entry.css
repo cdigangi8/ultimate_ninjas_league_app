@@ -129,3 +129,23 @@
     color: rgb(0, 92,180);
     transition: 200ms;
 }
+
+.updateBtn{
+    margin-top: 25px;
+    margin-bottom: 100px;
+    color: #ffffff;
+    background-color: rgba(91, 183,91,0.9);
+    width: 100%;
+    border: none;
+    border-radius: 3px;
+    padding: .5em;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.updateBtn:hover{
+    background-color: rgba(255,255,255,0.8);
+    color: rgb(91, 183,91);
+    transition: 200ms;
+}

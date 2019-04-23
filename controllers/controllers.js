@@ -3,6 +3,7 @@ export function convertObstacles(arr){
         var newArr = [];
         arr.forEach(function(item, index){
             item.choices = [];
+            item.time = '';
             for(var i=0; i<=item.linear_points_available; i++){
                 item.choices.push({key: item.obstacle_id + ':' + i,value: i, selected: false});
             }
@@ -15,6 +16,7 @@ export function convertObstacles(arr){
 export function resetObstacleArr(arr){
     const p = new Promise((res,reject)=>{
         arr.forEach(function(item, index){
+            item.time = '';
             for(var i=0; i<item.choices.length; i++){
                 item.choices[i].selected = false;
             }
@@ -32,11 +34,11 @@ export function calculateScore(arr){
             for(var i=0; i<item.choices.length; i++){
                 if(item.choices[i].selected == true){
                     totalScore += item.choices[i].value;
-                    resArr.push({key: item.obstacle_id , value: item.choices[i].value});
+                    resArr.push({key: item.obstacle_id , value: item.choices[i].value, time: item.time});
                 }
             }
         })
-        var returnVar = {score: totalScore, resStr: JSON.stringify(resArr)};
+        var returnVar = {score: totalScore, resStr: resArr};
         res(returnVar);
     })
     return p;
@@ -79,12 +81,7 @@ function rankArrFunc(arr){
         var newRank = false;
         for(var b=0; b<arr.length;b++){
         if(arr[a].points !== '' && arr[a].athlete_id !== arr[b].athlete_id){
-            // if(arr[b].rank !== '' && arr[b].rank !== null && arr[b].rank !== undefined){
-                console.log(arr[b].first_name + arr[b].rank);
-            // console.log(arr[a].first_name);
-            // console.log(arr[b].first_name);
             if(arr[a].points == arr[b].points){
-                //tie in points
                 if(parseInt(arr[a].tieOB) > parseInt(arr[b].tieOB)){
                     // arr[a].rank = rank;
                     newRank = true;
@@ -154,7 +151,6 @@ function rankArrFunc(arr){
     
     if(newRank == true){
         arr[a].rank = rank;
-        console.log(rank + arr[a].first_name);
     }else{
         arr[a].rank = arr.length;
     }
@@ -193,6 +189,146 @@ export function rankFunction(results, athletes, ageMin, ageMax){
         var rankArray = rankArrFunc(kidArray);
         rankArray.sort(compare);
         res({array: rankArray, completedCount: completedCount});
+    })
+    return p;
+}
+
+export function checkActiveScorecard(results, obstacles, athlete){
+    const p = new Promise((res,reject)=>{
+        var tiebreakMin = '';
+        var tiebreakSec = '';
+        var tiebreakMS = '';
+        var existingScorecard = false;
+        console.log(athlete);
+        for(var i=0; i<results.length; i++){
+            if(results[i].athlete_id == athlete){
+                console.log('success');
+                var resultArr = JSON.parse(results[i].result_string);
+                for(var z=0; z<obstacles.length; z++){
+                    for(var x=0; x<resultArr.length; x++){
+                        if(obstacles[z].obstacle_id == resultArr[x].key){
+                            for(var k=0; k<obstacles[z].choices.length; k++){
+                                if(obstacles[z].choices[k].value == resultArr[x].value){
+                                    obstacles[z].choices[k].selected = true;
+                                    if(resultArr[x].time){
+                                        obstacles[z].time = resultArr[x].time;
+                                    }
+                                    break;
+                                }
+                            }
+                            break;
+                        }
+                    }
+                }
+                tiebreakMin = results[i].tiebreaker_time.split(":")[1];
+                tiebreakSec = results[i].tiebreaker_time.split(":")[2].split(".")[0];
+                tiebreakMS = results[i].tiebreaker_time.split(":")[2].split(".")[1];
+                existingScorecard = true;
+                break;
+            }
+        }
+        res({obstacles: obstacles, min: tiebreakMin, sec: tiebreakSec, ms: tiebreakMS, existingScorecard: existingScorecard});
+    })
+    return p;
+}
+
+function sortArr(arr){
+    var cnt = 0;
+    for(var i=0; i<arr.length; i++){
+        if(arr[i].pts == 0){
+            cnt += 1;
+        }
+    }
+    if(cnt > 0){
+        for(var z=0; z<cnt; z++){
+            arr.push(arr[z]);
+        }
+        arr.splice(0, cnt);
+    }
+    return arr;
+}
+
+function getAvg(arr, comps){
+    arr = sortArr(arr);
+    console.log(arr);
+    var avg;
+    var num = 0;
+    var total;
+    if(arr.length < comps){
+        total = arr.length;
+    }else{
+        total = comps;
+    }
+    for(var i = 0; i<total; i++){
+            num += arr[i].pts;
+    }
+    if(total > 0){
+        avg = num/total;
+    }
+    return avg;
+}
+
+function getPts(arr, comps){
+    console.log(arr);
+    var num = 0;
+    var total;
+    if(arr.length < comps){
+        total = arr.length;
+    }else{
+        total = comps;
+    }
+    for(var i = 0; i<total; i++){
+            num += arr[i].pts;
+    }
+    return num;
+}
+
+export function updateSeasonRanking(athletes){
+    const p = new Promise((res,reject)=>{
+        for(var a=0; a<athletes.length; a++){
+            var rank = 1;
+            for(var b=0; b<athletes.length; b++){
+                var checkA;
+                var checkB;
+                if(athletes[a].ath !== athletes[b].ath){
+                    if(athletes[a].pts < athletes[b].pts){
+                        rank += 1;
+                    }else if(athletes[a].pts == athletes[b].pts){
+                        checkA = getAvg(athletes[a].res, 6);
+                        checkB = getAvg(athletes[b].res, 6);
+                        if(checkA > checkB){
+                            rank +=1;
+                        }else if(checkA == checkB){
+                            checkA = getPts(athletes[a].res, 7);
+                            checkB = getPts(athletes[b].res, 7);
+                            if(checkA < checkB){
+                                rank += 1;
+                            }else if(checkA == checkB){
+                                checkA = getAvg(athletes[a].res, 7);
+                                checkB = getAvg(athletes[b].res, 7);
+                                if(checkA > checkB){
+                                    rank +=1;
+                                }else if(checkA == checkB){
+                                    checkA = getPts(athletes[a].res, 8);
+                                    checkB = getPts(athletes[b].res, 8);
+                                    if(checkA < checkB){
+                                        rank += 1;
+                                    }else if(checkA == checkB){
+                                        checkA = getAvg(athletes[a].res, 8);
+                                        checkB = getAvg(athletes[b].res, 8);
+                                        if(checkA > checkB){
+                                            rank +=1;
+                                        }
+                                    }
+                            }
+                            }
+                        }
+                    }
+                }
+            }
+            athletes[a].rank = rank;
+        }
+        res({array: athletes});
     })
     return p;
 }

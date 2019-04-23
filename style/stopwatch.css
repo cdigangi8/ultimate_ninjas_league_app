@@ -1,0 +1,85 @@
+.Timer {
+    text-align: center;
+    font-size: 40px;
+    padding: 0px;
+  }
+
+  .Controls {
+    text-align: center;
+  }
+  
+  .startBtn{
+    margin-top: 25px;
+    color: #ffffff;
+    background-color: rgba(91, 183,91,0.9);
+    width: 100%;
+    border: none;
+    border-radius: 3px;
+    padding: .5em;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.startBtn:hover{
+    background-color: rgba(255,255,255,0.8);
+    color: rgb(91, 183,91);
+    transition: 200ms;
+}
+
+  .LapTime {
+    text-align: center;
+  }
+  
+  .LapTime__lap, .LapTime__time {
+    width: 50%;
+    padding: 5px;
+    text-align: center;
+    display: inline-block;
+    box-sizing: border-box;
+  }
+  .LapTimeList__list {
+    list-style: none;
+    padding: 0px;
+    margin: 15px auto;
+  }
+  
+  .LapTimeList__listwrap {
+    max-width: 270px;
+    margin: 0 auto;
+  }
+  
+  .LapTimeList__headers {
+    width: 100%;
+  }
+  
+  .LapTimeList__headers span {
+    width: 50%;
+    font-weight: bold;
+    text-align: center;
+    display: inline-block;
+    float: left;
+  }
+  .Stopwatch {
+    text-align: center;
+  }
+
+  .SWBoxTitle{
+    font-size: 18px;
+    border-bottom: 2px solid #bdbdbd;
+    background-color: rgb(0,90,180);
+    padding: 5px;
+    color: #ffffff;
+    font-weight: bold;
+}
+.SWBoxContent{
+    font-size: 34px;
+    padding: 10px 15px 20px 15px;
+    margin: 10px 10px;
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    border: 2px solid rgb(0,90,180);
+    color: rgb(0,90,180);
+}

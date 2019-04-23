@@ -71,6 +71,7 @@ class AddCompetitor extends Component {
 
         <Row>
                     <div className="pageContainer">
+
                         <Row className="pageInstructions" horizontal='center'>Add New Competitor</Row>
                         <div className="completeProfile">
                             <Row flexGrow={1} wrap horizontal='spaced'>
