@@ -445,15 +445,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/possibleConstructorReturn */ "./node_modules/@babel/runtime-corejs2/helpers/esm/possibleConstructorReturn.js");
 /* harmony import */ var _babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/getPrototypeOf */ "./node_modules/@babel/runtime-corejs2/helpers/esm/getPrototypeOf.js");
 /* harmony import */ var _babel_runtime_corejs2_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/inherits */ "./node_modules/@babel/runtime-corejs2/helpers/esm/inherits.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _style_stopwatch_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../style/stopwatch.css */ "./style/stopwatch.css");
-/* harmony import */ var _style_stopwatch_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_style_stopwatch_css__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _Timer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Timer */ "./components/Timer.js");
-/* harmony import */ var _Controls__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Controls */ "./components/Controls.js");
-/* harmony import */ var _LapTimeList__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./LapTimeList */ "./components/LapTimeList.js");
-/* harmony import */ var simple_flexbox__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! simple-flexbox */ "./node_modules/simple-flexbox/build/index.js");
-/* harmony import */ var simple_flexbox__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(simple_flexbox__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_date_now__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/date/now */ "./node_modules/@babel/runtime-corejs2/core-js/date/now.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_date_now__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_date_now__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _style_stopwatch_css__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../style/stopwatch.css */ "./style/stopwatch.css");
+/* harmony import */ var _style_stopwatch_css__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_style_stopwatch_css__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _Timer__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Timer */ "./components/Timer.js");
+/* harmony import */ var _Controls__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Controls */ "./components/Controls.js");
+/* harmony import */ var _LapTimeList__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./LapTimeList */ "./components/LapTimeList.js");
+/* harmony import */ var simple_flexbox__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! simple-flexbox */ "./node_modules/simple-flexbox/build/index.js");
+/* harmony import */ var simple_flexbox__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(simple_flexbox__WEBPACK_IMPORTED_MODULE_11__);
+
 
 
 
@@ -471,7 +474,11 @@ function getDefaultState() {
     isRunning: false,
     time: 0,
     timeList: [],
-    choices: []
+    choices: [],
+    start: _babel_runtime_corejs2_core_js_date_now__WEBPACK_IMPORTED_MODULE_5___default()(),
+    stopTime: 0,
+    restartTime: 0,
+    adjustedTime: 0
   };
 }
 
@@ -494,21 +501,38 @@ function (_Component) {
   Object(_babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_1__["default"])(Stopwatch, [{
     key: "updateTimer",
     value: function updateTimer(extraTime) {
-      var time = this.state.time;
+      var time = this.state.time; // this.setState({ time : time + extraTime });
+
       this.setState({
-        time: time + extraTime
+        time: extraTime
       });
-    }
+    } //   setInterval(function() {
+    //       var delta = Date.now() - start; // milliseconds elapsed since start
+    //       …
+    //       output(Math.floor(delta / 1000)); // in seconds
+    //       // alternatively just show wall clock time:
+    //       output(new Date().toUTCString());
+    //   }, 1000); // update about every second
+
   }, {
     key: "start",
     value: function start() {
       var _this2 = this;
 
+      if (this.state.stopTime != 0) {
+        this.state.restartTime = _babel_runtime_corejs2_core_js_date_now__WEBPACK_IMPORTED_MODULE_5___default()();
+        this.state.adjustedTime += this.state.restartTime - this.state.stopTime;
+      }
+
       this.setState({
         isRunning: true
       }, function () {
         _this2.timerRef = setInterval(function () {
-          _this2.updateTimer(10);
+          //  this.updateTimer( 10 ) 
+          var delta = _babel_runtime_corejs2_core_js_date_now__WEBPACK_IMPORTED_MODULE_5___default()() - _this2.state.start - _this2.state.adjustedTime; // milliseconds elapsed since start
+
+
+          _this2.updateTimer(delta);
         }, 10);
       });
     }
@@ -518,7 +542,8 @@ function (_Component) {
       var _this3 = this;
 
       this.setState({
-        isRunning: false
+        isRunning: false,
+        stopTime: _babel_runtime_corejs2_core_js_date_now__WEBPACK_IMPORTED_MODULE_5___default()()
       }, function () {
         clearInterval(_this3.timerRef);
       });
@@ -552,16 +577,16 @@ function (_Component) {
           isRunning = _this$state.isRunning,
           time = _this$state.time,
           timeList = _this$state.timeList;
-      return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
+      return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("div", {
         className: "Stopwatch"
-      }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("div", {
         style: {
           fontSize: '24px',
           fontWeight: 'bold'
         }
-      }, "Timer"), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_Timer__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      }, "Timer"), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_Timer__WEBPACK_IMPORTED_MODULE_8__["default"], {
         time: time
-      }), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_Controls__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      }), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_Controls__WEBPACK_IMPORTED_MODULE_9__["default"], {
         isRunning: isRunning,
         start: function start() {
           return _this4.start();
@@ -569,14 +594,14 @@ function (_Component) {
         stop: function stop() {
           return _this4.stop();
         }
-      }), isRunning ? react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
+      }), isRunning ? react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("div", {
         className: "obstacleBox"
-      }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("div", {
         className: "SWBoxTitle"
-      }, this.props.obstacle), react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_10__["Row"], {
+      }, this.props.obstacle), react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_11__["Row"], {
         horizontal: "center"
       }, this.props.choices.map(function (item, index) {
-        return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement("div", {
+        return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("div", {
           className: item.selected == true ? "SWBoxContent activeBox" : "SWBoxContent",
           onClick: function onClick(e) {
             return _this4.addObstacleTime(item);
@@ -587,7 +612,7 @@ function (_Component) {
   }]);
 
   return Stopwatch;
-}(react__WEBPACK_IMPORTED_MODULE_5__["Component"]);
+}(react__WEBPACK_IMPORTED_MODULE_6__["Component"]);
 
 /* harmony default export */ __webpack_exports__["default"] = (Stopwatch);
 
@@ -1204,6 +1229,17 @@ function timeFormat(miliseconds) {
 
   return "".concat(zeroPad(hh), ":").concat(zeroPad(mm), ":").concat(zeroPad(ss), ".").concat(zeroPad(S));
 }
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime-corejs2/core-js/date/now.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/core-js/date/now.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! core-js/library/fn/date/now */ "./node_modules/core-js/library/fn/date/now.js");
 
 /***/ }),
 
@@ -23304,6 +23340,19 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 /***/ }),
 
+/***/ "./node_modules/core-js/library/fn/date/now.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/core-js/library/fn/date/now.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(/*! ../../modules/es6.date.now */ "./node_modules/core-js/library/modules/es6.date.now.js");
+module.exports = __webpack_require__(/*! ../../modules/_core */ "./node_modules/core-js/library/modules/_core.js").Date.now;
+
+
+/***/ }),
+
 /***/ "./node_modules/core-js/library/fn/json/stringify.js":
 /*!***********************************************************!*\
   !*** ./node_modules/core-js/library/fn/json/stringify.js ***!
@@ -25361,6 +25410,21 @@ Iterators.Arguments = Iterators.Array;
 addToUnscopables('keys');
 addToUnscopables('values');
 addToUnscopables('entries');
+
+
+/***/ }),
+
+/***/ "./node_modules/core-js/library/modules/es6.date.now.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/core-js/library/modules/es6.date.now.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// 20.3.3.1 / 15.9.4.4 Date.now()
+var $export = __webpack_require__(/*! ./_export */ "./node_modules/core-js/library/modules/_export.js");
+
+$export($export.S, 'Date', { now: function () { return new Date().getTime(); } });
 
 
 /***/ }),
@@ -48000,18 +48064,6 @@ function (_Component) {
 
 /***/ }),
 
-/***/ 1:
-/*!******************************************************************************************************************************************************************!*\
-  !*** multi next-client-pages-loader?page=%2Fresults_entry&absolutePagePath=%2FUsers%2Fchristopherdigangi%2Fgit%2Fultimate_ninjas_app%2Fpages%2Fresults_entry.js ***!
-  \******************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2Fresults_entry&absolutePagePath=%2FUsers%2Fchristopherdigangi%2Fgit%2Fultimate_ninjas_app%2Fpages%2Fresults_entry.js! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fresults_entry&absolutePagePath=%2FUsers%2Fchristopherdigangi%2Fgit%2Fultimate_ninjas_app%2Fpages%2Fresults_entry.js!./");
-
-
-/***/ }),
-
 /***/ 4:
 /*!**********************!*\
   !*** util (ignored) ***!
@@ -48034,6 +48086,18 @@ module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2Fresult
 
 /***/ }),
 
+/***/ 6:
+/*!******************************************************************************************************************************************************************!*\
+  !*** multi next-client-pages-loader?page=%2Fresults_entry&absolutePagePath=%2FUsers%2Fchristopherdigangi%2Fgit%2Fultimate_ninjas_app%2Fpages%2Fresults_entry.js ***!
+  \******************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2Fresults_entry&absolutePagePath=%2FUsers%2Fchristopherdigangi%2Fgit%2Fultimate_ninjas_app%2Fpages%2Fresults_entry.js! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fresults_entry&absolutePagePath=%2FUsers%2Fchristopherdigangi%2Fgit%2Fultimate_ninjas_app%2Fpages%2Fresults_entry.js!./");
+
+
+/***/ }),
+
 /***/ "dll-reference dll_6dc2816e14fab51b8269":
 /*!*******************************************!*\
   !*** external "dll_6dc2816e14fab51b8269" ***!
@@ -48045,5 +48109,5 @@ module.exports = dll_6dc2816e14fab51b8269;
 
 /***/ })
 
-},[[1,"static/runtime/webpack.js","styles"]]]));;
+},[[6,"static/runtime/webpack.js","styles"]]]));;
 //# sourceMappingURL=results_entry.js.map

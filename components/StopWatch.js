@@ -12,7 +12,11 @@ function getDefaultState() {
     isRunning : false,
     time      : 0,
     timeList  : [],
-    choices: []    
+    choices: [],
+    start: Date.now(),
+    stopTime: 0,
+    restartTime: 0,
+    adjustedTime: 0
   }
 }
 
@@ -26,22 +30,41 @@ class Stopwatch extends Component {
 
   updateTimer(extraTime) {
     const { time } = this.state;
-    this.setState({ time : time + extraTime });
+    // this.setState({ time : time + extraTime });
+    this.setState({ time : extraTime });
   }
 
+
+//   setInterval(function() {
+//       var delta = Date.now() - start; // milliseconds elapsed since start
+//       …
+//       output(Math.floor(delta / 1000)); // in seconds
+//       // alternatively just show wall clock time:
+//       output(new Date().toUTCString());
+//   }, 1000); // update about every second
+
   start() {
+    if(this.state.stopTime != 0){
+        this.state.restartTime = Date.now();
+        this.state.adjustedTime += this.state.restartTime - this.state.stopTime;
+    }
     this.setState({
       isRunning : true 
     }, () => {
       this.timerRef = setInterval(
-        () => { this.updateTimer( 10 ) }, 10
+        () => {
+            //  this.updateTimer( 10 ) 
+            var delta = Date.now() - this.state.start - this.state.adjustedTime; // milliseconds elapsed since start
+            this.updateTimer(delta);
+            }, 10
       )
     });
   }
 
   stop() {
     this.setState({
-      isRunning : false 
+      isRunning : false,
+      stopTime: Date.now()
     }, () => {
       clearInterval(this.timerRef);
     });
