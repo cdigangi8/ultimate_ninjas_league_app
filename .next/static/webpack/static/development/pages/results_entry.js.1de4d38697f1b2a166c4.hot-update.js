@@ -89,8 +89,16 @@ function (_Component) {
       var _this2 = this;
 
       if (this.state.stopTime != 0) {
-        this.state.restartTime = _babel_runtime_corejs2_core_js_date_now__WEBPACK_IMPORTED_MODULE_5___default()();
-        this.state.adjustedTime += this.state.restartTime - this.state.stopTime;
+        // this.state.restartTime = Date.now();
+        // this.state.adjustedTime += this.state.restartTime - this.state.stopTime;
+        this.setState({
+          restartTime: _babel_runtime_corejs2_core_js_date_now__WEBPACK_IMPORTED_MODULE_5___default()(),
+          adjustedTime: this.state.adjustedTime + (_babel_runtime_corejs2_core_js_date_now__WEBPACK_IMPORTED_MODULE_5___default()() - this.state.stopTime)
+        });
+      } else {
+        this.setState({
+          start: _babel_runtime_corejs2_core_js_date_now__WEBPACK_IMPORTED_MODULE_5___default()()
+        });
       }
 
       this.setState({
@@ -102,7 +110,7 @@ function (_Component) {
 
 
           _this2.updateTimer(delta);
-        }, 100);
+        }, 10);
       });
     }
   }, {
@@ -188,4 +196,4 @@ function (_Component) {
 /***/ })
 
 })
-//# sourceMappingURL=results_entry.js.c21afd3d136baa112d18.hot-update.js.map
+//# sourceMappingURL=results_entry.js.1de4d38697f1b2a166c4.hot-update.js.map

@@ -13,7 +13,7 @@ function getDefaultState() {
     time      : 0,
     timeList  : [],
     choices: [],
-    start: Date.now(),
+    start: 0,
     stopTime: 0,
     restartTime: 0,
     adjustedTime: 0
@@ -45,8 +45,11 @@ class Stopwatch extends Component {
 
   start() {
     if(this.state.stopTime != 0){
-        this.state.restartTime = Date.now();
-        this.state.adjustedTime += this.state.restartTime - this.state.stopTime;
+        // this.state.restartTime = Date.now();
+        // this.state.adjustedTime += this.state.restartTime - this.state.stopTime;
+        this.setState({restartTime: Date.now(), adjustedTime: this.state.adjustedTime + (Date.now() - this.state.stopTime)});
+    }else{
+        this.setState({start: Date.now()});
     }
     this.setState({
       isRunning : true 
@@ -54,7 +57,7 @@ class Stopwatch extends Component {
       this.timerRef = setInterval(
         () => {
             //  this.updateTimer( 10 ) 
-            var delta = Date.now() - this.state.start - this.state.adjustedTime; // milliseconds elapsed since start
+            var delta = Date.now() - this.state.start - (this.state.adjustedTime); // milliseconds elapsed since start
             this.updateTimer(delta);
             }, 10
       )
