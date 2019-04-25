@@ -11,12 +11,6 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/add_competitors": [
-      "static/runtime/webpack.js",
-      "static/css/styles.chunk.css",
-      "static/chunks/styles.js",
-      "static/runtime/main.js"
-    ],
     "/results_entry": [
       "static/runtime/webpack.js",
       "static/css/styles.chunk.css",

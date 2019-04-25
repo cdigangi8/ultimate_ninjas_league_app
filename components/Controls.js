@@ -32,8 +32,7 @@ class Controls extends Component {
         { isRunning ?
           <button
             onClick={ stop }
-            className="startBtn"
-            style={{backgroundColor: "rgb(216, 83,78)"}}
+            className="stopBtn"
             ref="stopBtn" > Stop </button>
         : null }
 

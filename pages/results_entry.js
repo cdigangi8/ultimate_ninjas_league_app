@@ -105,7 +105,8 @@ class ResultsEntry extends Component {
             this.setState({currentAthleteIndex: elementPos,currentAthlete: athlete, showCompetitors: false, 
                 showAgeSelect: false, showScorecard: true, obstacles: resp.obstacles, tieBreakMin: resp.min, tieBreakSec: resp.sec,
                 tieBreakMs: resp.ms, existingScorecard: resp.existingScorecard, obstacleIndex: 0});
-        })
+                document.getElementById('resultsEntry').scrollTop = 0;
+        });
     }
 
     createPointRow(item){
@@ -322,7 +323,7 @@ submitNewTime(){
     }
 
     render(){
-    return <div className="resultsEntry">
+    return <div id="resultsEntry" className="resultsEntry">
         <UNHeader title='Youth League Results' link='' linkTitle=''></UNHeader>
 
         <Row>
@@ -427,7 +428,7 @@ submitNewTime(){
                                 </div>
                             </div>
                         </Row>
-                        <Row horiozontal="center">
+                        <Row horizontal="center">
                             {this.state.existingScorecard == false ? <button className='submitBtn' onClick={ e => this.confirmSubmission('scorecard')}>Submit</button>
                              : <button className='updateBtn' onClick={ e => this.confirmSubmission('scorecard')}>Update</button>}
                         </Row>

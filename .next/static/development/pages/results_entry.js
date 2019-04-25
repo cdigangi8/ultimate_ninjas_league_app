@@ -262,10 +262,7 @@ function (_Component) {
         ref: "startBtn"
       }, " Start ") : null, isRunning ? react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("button", {
         onClick: stop,
-        className: "startBtn",
-        style: {
-          backgroundColor: "rgb(216, 83,78)"
-        },
+        className: "stopBtn",
         ref: "stopBtn"
       }, " Stop ") : null);
     }
@@ -47209,6 +47206,8 @@ function (_Component) {
           existingScorecard: resp.existingScorecard,
           obstacleIndex: 0
         });
+
+        document.getElementById('resultsEntry').scrollTop = 0;
       });
     }
   }, {
@@ -47627,6 +47626,7 @@ function (_Component) {
       var _this12 = this;
 
       return react__WEBPACK_IMPORTED_MODULE_12___default.a.createElement("div", {
+        id: "resultsEntry",
         className: "resultsEntry"
       }, react__WEBPACK_IMPORTED_MODULE_12___default.a.createElement(_components_header__WEBPACK_IMPORTED_MODULE_13__["default"], {
         title: "Youth League Results",
@@ -47869,7 +47869,7 @@ function (_Component) {
         value: this.state.tieBreakMs,
         onChange: this.handleChange('tieBreakMs')
       }))))), react__WEBPACK_IMPORTED_MODULE_12___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_32__["Row"], {
-        horiozontal: "center"
+        horizontal: "center"
       }, this.state.existingScorecard == false ? react__WEBPACK_IMPORTED_MODULE_12___default.a.createElement("button", {
         className: "submitBtn",
         onClick: function onClick(e) {
