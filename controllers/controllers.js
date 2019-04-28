@@ -260,16 +260,16 @@ function getAvg(arr, comps){
         total = comps;
     }
     for(var i = 0; i<total; i++){
-            num += arr[i].pts;
+            num += arr[i].rank;
     }
     if(total > 0){
         avg = num/total;
+        console.log(avg);
     }
     return avg;
 }
 
-function getPts(arr, comps){
-    console.log(arr);
+function getPts(arr, comps, athCnt){
     var num = 0;
     var total;
     if(arr.length < comps){
@@ -278,7 +278,7 @@ function getPts(arr, comps){
         total = comps;
     }
     for(var i = 0; i<total; i++){
-            num += arr[i].pts;
+            num += athCnt - (arr[i].rank-1);
     }
     return num;
 }
@@ -299,8 +299,8 @@ export function updateSeasonRanking(athletes){
                         if(checkA > checkB){
                             rank +=1;
                         }else if(checkA == checkB){
-                            checkA = getPts(athletes[a].res, 7);
-                            checkB = getPts(athletes[b].res, 7);
+                            checkA = getPts(athletes[a].res, 7, athletes.length);
+                            checkB = getPts(athletes[b].res, 7, athletes.length);
                             if(checkA < checkB){
                                 rank += 1;
                             }else if(checkA == checkB){
@@ -309,8 +309,8 @@ export function updateSeasonRanking(athletes){
                                 if(checkA > checkB){
                                     rank +=1;
                                 }else if(checkA == checkB){
-                                    checkA = getPts(athletes[a].res, 8);
-                                    checkB = getPts(athletes[b].res, 8);
+                                    checkA = getPts(athletes[a].res, 8, athletes.length);
+                                    checkB = getPts(athletes[b].res, 8, athletes.length);
                                     if(checkA < checkB){
                                         rank += 1;
                                     }else if(checkA == checkB){

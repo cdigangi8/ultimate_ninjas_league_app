@@ -45,8 +45,6 @@ class Stopwatch extends Component {
 
   start() {
     if(this.state.stopTime != 0){
-        // this.state.restartTime = Date.now();
-        // this.state.adjustedTime += this.state.restartTime - this.state.stopTime;
         this.setState({restartTime: Date.now(), adjustedTime: this.state.adjustedTime + (Date.now() - this.state.stopTime)});
     }else{
         this.setState({start: Date.now()});

@@ -42,7 +42,9 @@ body{
     margin-left: 25px;
     margin-right: 25px;
     width: 100%;
-    margin-bottom: 100px;
+    height: calc(100vh - 135px);
+    overflow: auto;
+    padding-bottom: 100px;
 }
 
 .subTitle{
@@ -75,11 +77,11 @@ body{
     background-color: #ffffff;
     border: #979797;
     cursor: pointer;
-    padding: 20px;
+    padding: 10px;
     text-align: center;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
-    margin-top: 15px;
+    margin-top: 10px;
     font-size: 1.5em;
 }
 
@@ -157,128 +159,121 @@ body{
     transition: 200ms;
 }
 
-.updateBtn{
-    margin-top: 25px;
-    margin-bottom: 100px;
-    color: #ffffff;
-    background-color: rgba(91, 183,91,0.9);
-    width: 100%;
-    border: none;
-    border-radius: 3px;
-    padding: .5em;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-}
 
-.updateBtn:hover{
-    background-color: rgba(255,255,255,0.8);
-    color: rgb(91, 183,91);
-    transition: 200ms;
-}
-.Timer {
-    text-align: center;
-    font-size: 40px;
-    padding: 0px;
+  .root {
+    display: flex,
   }
 
-  .Controls {
-    text-align: center;
+  .menuButton {
+    margin-left: 12px;
+    margin-right: 36px;
   }
-  
-  .startBtn{
-    margin-top: 25px;
-    color: #ffffff;
-    background-color: rgba(91, 183,91,0.9);
-    width: 100%;
-    border: none;
-    border-radius: 3px;
-    padding: 1em;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-}
 
-.startBtn:hover{
-    background-color: rgba(255,255,255,0.8);
-    color: rgb(91, 183,91);
-    transition: 200ms;
-}
-
-.stopBtn{
-    margin-top: 25px;
-    color: #ffffff;
-    background-color: rgba(216, 83,78,.9);
-    width: 100%;
-    border: none;
-    border-radius: 3px;
-    padding: .5em;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.stopBtn:hover{
-    background-color: rgba(255,255,255,0.8);
-    color: rgb(216, 83,78);
-    transition: 200ms;
-}
-
-  .LapTime {
-    text-align: center;
+  .hide {
+    display: none;
   }
-  
-  .LapTime__lap, .LapTime__time {
-    width: 50%;
+  .drawer {
+    width: 300px;
+    flex-shrink: 0;
+    white-space: nowrap;
+    background-color: #ffffff;
+    overflow-x: hidden;
+    height: calc(100vh - 135px);
+    background-color: rgba(2, 45, 94, 0.9);
+  }
+  .drawerOpen {
+    width: 300px;
+    transition: .5s ease;
+  }
+  .drawerClose {
+    width: 65px;
+    transition: .5s ease;
+    overflow-x: hidden,
+  }
+  .toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 8px;
+    border-bottom: 1px solid rgb(22, 65, 114);
+  }
+  .content {
+    flex-grow: 1;
+    padding: 3px;
+  }
+.activeListItem{
+    background-color: rgba(0,90,180,0.5);
+    color: #ffffff;
+}
+
+.toolbarBtn{
     padding: 5px;
-    text-align: center;
-    display: inline-block;
-    box-sizing: border-box;
-  }
-  .LapTimeList__list {
-    list-style: none;
-    padding: 0px;
-    margin: 15px auto;
-  }
-  
-  .LapTimeList__listwrap {
-    max-width: 270px;
-    margin: 0 auto;
-  }
-  
-  .LapTimeList__headers {
-    width: 100%;
-  }
-  
-  .LapTimeList__headers span {
-    width: 50%;
-    font-weight: bold;
-    text-align: center;
-    display: inline-block;
-    float: left;
-  }
-  .Stopwatch {
-    text-align: center;
-  }
+    font-size: 24px;
+    cursor: pointer;
+    margin: 5px;
+    border-radius: 3px;
+    color: rgb(62, 105, 154);
+}
 
-  .SWBoxTitle{
+.toolbarBtn:hover{
+    background-color: rgb(22, 65, 114);
+}
+
+.titleRow{
+    padding: 15px 20px;
+}
+.titleIcon{
     font-size: 18px;
-    border-bottom: 2px solid #bdbdbd;
-    background-color: rgb(0,90,180);
-    padding: 5px;
-    color: #ffffff;
+    color: rgb(62, 105, 154);
+}
+.titleText{
+    margin-left: 30px;
+    color: rgb(162, 205, 254);
+}
+.optionRow{
+    padding: 10px 20px;
+    cursor: pointer;
+}
+.optionRow:hover{
+    background-color: rgb(22, 65, 114);
+}
+.optionLetterIcon{
+    margin-left: 10px;
+    background-color: rgb(62, 105, 154);
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    padding: 5px 9px;
+    font-size: 12px;
+}
+.optionText{
+    margin-left: 25px;
+    color: rgb(162, 205, 254);
+}
+
+.optionSection{
+    border-bottom: 1px solid rgb(22, 65, 114);
+    padding-bottom: 10px;
+}
+
+.athleteStandingsBox{
+    background-color: rgba(125, 199, 56, 0.9);
+    border: #979797;
+    cursor: pointer;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    margin-top: 10px;
+    font-size: 1.5em;
+    color: rgb(255,255,255);
     font-weight: bold;
 }
-.SWBoxContent{
-    font-size: 40px;
-    padding: 10px 15px 20px 15px;
-    margin: 10px 15px;
-    cursor: pointer;
-    height: 36px;
-    width: 36px;
-    border-radius: 50%;
-    border: 2px solid rgb(0,90,180);
-    color: rgb(0,90,180);
-}
+
+.athleteStandingsBox:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    background-color: rgba(165, 239, 96, 0.9);
+  }
+
 
 /*# sourceMappingURL=styles.chunk.css.map*/
