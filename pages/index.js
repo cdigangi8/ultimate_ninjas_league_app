@@ -549,7 +549,7 @@ class YlLeaderboard extends Component {
                         {this.state.rankArr.map((item, index) => {
                                 return <div className="athleteStandingsBox">
                                     <Row horizontal='space-around' vertical='center'>
-                                        <div>{index + 1}.</div>
+                                        <div>{item.rank}.</div>
                                         <div>{item.first_name + ' ' + item.last_name.substring(0,1)}</div>
                                         <div><div>{item.Points}</div><div style={{fontSize: ".8em", color: "rgb(225,225,225)"}}>Pts.</div></div>
                                     </Row>
