@@ -112,7 +112,7 @@ class Stopwatch extends Component {
         { isRunning ?
           <div className="obstacleBox">
           <div  className="SWBoxTitle">{this.props.obstacle}</div>
-          <Row horizontal="center">
+          <Row horizontal="center" wrap>
           {this.props.choices.map((item, index) => {
                 return <div className={item.selected == true ? "SWBoxContent activeBox" : "SWBoxContent"} onClick={e=> this.addObstacleTime(item) }>{item.value}</div>
             })}

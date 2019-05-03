@@ -23,8 +23,36 @@
       "publicPath": "static/chunks/styles.js"
     },
     {
+      "id": 7,
+      "name": null,
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    },
+    {
+      "id": 8,
+      "name": null,
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    },
+    {
       "id": 3,
       "name": null,
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    }
+  ],
+  "../style/results_entry.css": [
+    {
+      "id": "./style/results_entry.css",
+      "name": "./style/results_entry.css",
+      "file": "static/chunks/styles.js",
+      "publicPath": "static/chunks/styles.js"
+    }
+  ],
+  "../style/stopwatch.css": [
+    {
+      "id": "./style/stopwatch.css",
+      "name": "./style/stopwatch.css",
       "file": "static/chunks/styles.js",
       "publicPath": "static/chunks/styles.js"
     }

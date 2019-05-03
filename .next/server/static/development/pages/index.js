@@ -1783,7 +1783,7 @@ function (_Component) {
         }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_27__["Row"], {
           horizontal: "space-around",
           vertical: "center"
-        }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, index + 1, "."), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, item.first_name + ' ' + item.last_name.substring(0, 1)), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, item.Points), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+        }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, item.rank, "."), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, item.first_name + ' ' + item.last_name.substring(0, 1)), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, item.Points), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
           style: {
             fontSize: ".8em",
             color: "rgb(225,225,225)"
