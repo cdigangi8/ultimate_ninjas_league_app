@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -1005,16 +1005,14 @@ function rankArrFunc(arr) {
       if (arr[a].points !== '' && arr[a].athlete_id !== arr[b].athlete_id) {
         if (arr[a].points == arr[b].points) {
           if (_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default()(arr[a].tieOB) > _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_0___default()(arr[b].tieOB)) {
+            // arr[a].rank = rank;
             newRank = true;
           } else if (arr[a].tieOB == arr[b].tieOB) {
             if (arr[a].tieOB == '') {
-              var aTime = convertMilliSec(arr[a].tieTime);
-              var bTime = convertMilliSec(arr[b].tieTime);
-
-              if (aTime < bTime) {
+              if (arr[a].tieTime < arr[b].tieTime) {
                 // arr[a].rank = rank;
                 newRank = true;
-              } else if (aTime == bTime) {
+              } else if (arr[a].tieTime == arr[b].tieTime) {
                 // arr[a].rank = rank;
                 newRank = true;
               } else {
@@ -1024,8 +1022,9 @@ function rankArrFunc(arr) {
               var ath1res = JSON.parse(arr[a].resultStr);
               var ath1pts;
               var ath2res = JSON.parse(arr[b].resultStr);
-              var ath2pts; // console.log(ath1res);
-              // console.log(ath2res);
+              var ath2pts;
+              console.log(ath1res);
+              console.log(ath2res);
 
               for (var a1 = 0; a1 < ath1res.length; a1++) {
                 // if(ath1res[a1].key == arr[a].tieOB){
@@ -1041,8 +1040,9 @@ function rankArrFunc(arr) {
                   ath2pts = ath2res[a2].value;
                   break;
                 }
-              } // console.log(ath1pts + ' : ' + ath2pts);
+              }
 
+              console.log(ath1pts + ' : ' + ath2pts);
 
               if (ath1pts > ath2pts) {
                 newRank = true;
@@ -1050,9 +1050,9 @@ function rankArrFunc(arr) {
                 var aTime = convertMilliSec(arr[a].tieTime);
                 var bTime = convertMilliSec(arr[b].tieTime);
 
-                if (aTime < bTime) {
+                if (arr[a].tieTime < arr[b].tieTime) {
                   newRank = true;
-                } else if (aTime == bTime) {
+                } else if (arr[a].tieTime == arr[b].tieTime) {
                   newRank = true;
                 } else {
                   rank += 1;
@@ -1062,12 +1062,6 @@ function rankArrFunc(arr) {
               }
             }
           } else {
-            if (arr[a].athlete_id == 89) {
-              console.log(rank);
-              console.log(arr[a]);
-              console.log(arr[b]);
-            }
-
             rank += 1;
           }
         } else if (arr[a].points < arr[b].points) {
@@ -1075,14 +1069,16 @@ function rankArrFunc(arr) {
           rank += 1;
         } else {
           //more points
+          // arr[a].rank = rank;
           newRank = true;
-        }
+        } // }else{
+        //     newRank = true;
+        // }
+
       }
     }
 
     if (newRank == true) {
-      // console.log(arr[a]);
-      // console.log(rank);
       arr[a].rank = rank;
     } else {
       arr[a].rank = arr.length;
@@ -2184,14 +2180,6 @@ function (_Component) {
       var _this8 = this;
 
       var tiebreakTime = this.convertTime(this.state.tieBreakMin, this.state.tieBreakSec, this.state.tieBreakMs);
-      var tiebreakOB;
-
-      if (this.state.tiebreakerOb == '') {
-        tiebreakOB = this.state.obstacles.length;
-      } else {
-        tiebreakOB = this.state.tiebreakerOb;
-      }
-
       Object(_controllers_controllers__WEBPACK_IMPORTED_MODULE_16__["calculateScore"])(this.state.obstacles).then(function (resp) {
         var points = resp.score;
         var resultString = resp.resStr;
@@ -2209,7 +2197,7 @@ function (_Component) {
             errorMsg: "Tiebreak time is zero and should have a value!"
           });
         } else {
-          Object(_api_api__WEBPACK_IMPORTED_MODULE_15__["postScorecard"])(_this8.state.currentAthlete, _this8.state.courses[_this8.state.courseIndex].course_id, points, tiebreakOB, tiebreakTime, _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_3___default()(resultString)).then(function (resp2) {
+          Object(_api_api__WEBPACK_IMPORTED_MODULE_15__["postScorecard"])(_this8.state.currentAthlete, _this8.state.courses[_this8.state.courseIndex].course_id, points, _this8.state.tiebreakerOb, tiebreakTime, _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_3___default()(resultString)).then(function (resp2) {
             console.log(resp2);
 
             if ("affectedRows" in resp2.data.status) {
@@ -2250,14 +2238,6 @@ function (_Component) {
       var _this9 = this;
 
       var tiebreakTime = this.convertTime(this.state.tieBreakMin, this.state.tieBreakSec, this.state.tieBreakMs);
-      var tiebreakOB;
-
-      if (this.state.tiebreakerOb == '') {
-        tiebreakOB = this.state.obstacles.length;
-      } else {
-        tiebreakOB = this.state.tiebreakerOb;
-      }
-
       Object(_controllers_controllers__WEBPACK_IMPORTED_MODULE_16__["calculateScore"])(this.state.obstacles).then(function (resp) {
         var points = resp.score;
         var resultString = resp.resStr;
@@ -2275,7 +2255,7 @@ function (_Component) {
             errorMsg: "Tiebreak time is zero and should have a value!"
           });
         } else {
-          Object(_api_api__WEBPACK_IMPORTED_MODULE_15__["postUpdatedScorecard"])(_this9.state.currentAthlete, _this9.state.courses[_this9.state.courseIndex].course_id, points, tiebreakOB, tiebreakTime, _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_3___default()(resultString)).then(function (resp2) {
+          Object(_api_api__WEBPACK_IMPORTED_MODULE_15__["postUpdatedScorecard"])(_this9.state.currentAthlete, _this9.state.courses[_this9.state.courseIndex].course_id, points, _this9.state.tiebreakerOb, tiebreakTime, _babel_runtime_corejs2_core_js_json_stringify__WEBPACK_IMPORTED_MODULE_3___default()(resultString)).then(function (resp2) {
             if ("affectedRows" in resp2.data.status) {
               Object(_controllers_controllers__WEBPACK_IMPORTED_MODULE_16__["resetObstacleArr"])(_this9.state.obstacles).then(function (resp3) {
                 Object(_controllers_controllers__WEBPACK_IMPORTED_MODULE_16__["rankFunction"])(resp2.data.results, _this9.state.athletes, _this9.state.ageMin, _this9.state.ageMax).then(function (resp4) {
@@ -2881,7 +2861,7 @@ function (_Component) {
 
 /***/ }),
 
-/***/ 4:
+/***/ 3:
 /*!**************************************!*\
   !*** multi ./pages/results_entry.js ***!
   \**************************************/

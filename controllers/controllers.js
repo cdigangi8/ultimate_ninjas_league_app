@@ -95,16 +95,16 @@ function rankArrFunc(arr){
         if(arr[a].points !== '' && arr[a].athlete_id !== arr[b].athlete_id){
             if(arr[a].points == arr[b].points){
                 if(parseInt(arr[a].tieOB) > parseInt(arr[b].tieOB)){
+                    // arr[a].rank = rank;
                     newRank = true;
                 }else if(arr[a].tieOB == arr[b].tieOB){
                     if(arr[a].tieOB == ''){
-                        var aTime = convertMilliSec(arr[a].tieTime);
-                        var bTime = convertMilliSec(arr[b].tieTime);
-                        if(aTime < bTime){
+                        if(arr[a].tieTime < arr[b].tieTime){
                             // arr[a].rank = rank;
                             newRank = true;
-                        }else if(aTime == bTime){
+                        }else if(arr[a].tieTime == arr[b].tieTime){
                             // arr[a].rank = rank;
+
                             newRank = true;
                         }else{
                             rank += 1;
@@ -114,8 +114,8 @@ function rankArrFunc(arr){
                         var ath1pts;
                         var ath2res = JSON.parse(arr[b].resultStr);
                         var ath2pts;
-                        // console.log(ath1res);
-                        // console.log(ath2res);
+                        console.log(ath1res);
+                        console.log(ath2res);
                         for(var a1=0; a1<ath1res.length; a1++){
                             // if(ath1res[a1].key == arr[a].tieOB){
                             if((a1+1) == arr[a].tieOB){
@@ -130,16 +130,16 @@ function rankArrFunc(arr){
                                 break;
                             }
                         }
-                        // console.log(ath1pts + ' : ' + ath2pts);
+                        console.log(ath1pts + ' : ' + ath2pts);
                         
                         if(ath1pts > ath2pts){
                             newRank = true;
                         }else if(ath1pts == ath2pts){
                             var aTime = convertMilliSec(arr[a].tieTime);
                             var bTime = convertMilliSec(arr[b].tieTime);
-                            if(aTime < bTime){
+                            if(arr[a].tieTime < arr[b].tieTime){
                                 newRank = true;
-                            }else if(aTime == bTime){
+                            }else if(arr[a].tieTime == arr[b].tieTime){
                                 newRank = true;
                             }else{
                                 rank += 1;
@@ -149,11 +149,6 @@ function rankArrFunc(arr){
                         }
                     }
                 }else{
-                    if(arr[a].athlete_id == 89){
-                        console.log(rank);
-                        console.log(arr[a]);
-                        console.log(arr[b]);
-                    }
                     rank += 1;
                 }
             }else if(arr[a].points < arr[b].points){
@@ -161,18 +156,20 @@ function rankArrFunc(arr){
                 rank += 1;
             }else{
                 //more points
+                // arr[a].rank = rank;
                 newRank = true;
             }
+        // }else{
+        //     newRank = true;
+        // }
         }
     }
     
-        if(newRank == true){
-            // console.log(arr[a]);
-            // console.log(rank);
-            arr[a].rank = rank;
-        }else{
-            arr[a].rank = arr.length;
-        }
+    if(newRank == true){
+        arr[a].rank = rank;
+    }else{
+        arr[a].rank = arr.length;
+    }
     }
     return arr
 }

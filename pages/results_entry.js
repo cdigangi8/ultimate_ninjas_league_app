@@ -199,12 +199,6 @@ class ResultsEntry extends Component {
 
     submitScorecard(){
         var tiebreakTime = this.convertTime(this.state.tieBreakMin, this.state.tieBreakSec, this.state.tieBreakMs);
-        var tiebreakOB;
-        if(this.state.tiebreakerOb == ''){
-            tiebreakOB = this.state.obstacles.length;
-        }else{
-            tiebreakOB = this.state.tiebreakerOb;
-        }
         calculateScore(this.state.obstacles).then(resp=>{
             var points = resp.score;
             var resultString = resp.resStr;
@@ -213,7 +207,7 @@ class ResultsEntry extends Component {
             }else if(tiebreakTime == '00:00:00.00' && resultString.length > 0){
                 this.setState({openDialog: false, errorDialog: true, errorMsg: "Tiebreak time is zero and should have a value!"});
             }else{
-                postScorecard(this.state.currentAthlete, this.state.courses[this.state.courseIndex].course_id, points, tiebreakOB, tiebreakTime, JSON.stringify(resultString)).then(resp2=>{
+                postScorecard(this.state.currentAthlete, this.state.courses[this.state.courseIndex].course_id, points, this.state.tiebreakerOb, tiebreakTime, JSON.stringify(resultString)).then(resp2=>{
                     console.log(resp2);
                     if("affectedRows" in  resp2.data.status){
                         resetObstacleArr(this.state.obstacles).then(resp3=>{
@@ -234,12 +228,6 @@ class ResultsEntry extends Component {
 
     updateScorecard(){
         var tiebreakTime = this.convertTime(this.state.tieBreakMin, this.state.tieBreakSec, this.state.tieBreakMs);
-        var tiebreakOB;
-        if(this.state.tiebreakerOb == ''){
-            tiebreakOB = this.state.obstacles.length;
-        }else{
-            tiebreakOB = this.state.tiebreakerOb;
-        }
         calculateScore(this.state.obstacles).then(resp=>{
             var points = resp.score;
             var resultString = resp.resStr;
@@ -248,7 +236,7 @@ class ResultsEntry extends Component {
             }else if(tiebreakTime == '00:00:00.00' && resultString.length > 0){
                 this.setState({openDialog: false, errorDialog: true, errorMsg: "Tiebreak time is zero and should have a value!"});
             }else{
-                postUpdatedScorecard(this.state.currentAthlete, this.state.courses[this.state.courseIndex].course_id, points, tiebreakOB, tiebreakTime, JSON.stringify(resultString)).then(resp2=>{
+                postUpdatedScorecard(this.state.currentAthlete, this.state.courses[this.state.courseIndex].course_id, points, this.state.tiebreakerOb, tiebreakTime, JSON.stringify(resultString)).then(resp2=>{
                     if("affectedRows" in  resp2.data.status){
                         resetObstacleArr(this.state.obstacles).then(resp3=>{
                             rankFunction(resp2.data.results, this.state.athletes, this.state.ageMin, this.state.ageMax).then(resp4=>{
