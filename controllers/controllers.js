@@ -73,6 +73,18 @@ function compare(a, b) {
     return comparison;
   }
 
+  function convertMilliSec(t){
+    var time;
+    var hour = t.split(":")[0];
+    var min = t.split(":")[1];
+    var sec = t.split(":")[2].split('.')[0];
+    var ms = t.split(":")[2].split('.')[1];
+    
+    time = (((hour*3600) + (min*60) + (sec))*1000) + ms;
+
+    return time
+  }
+
   
 function rankArrFunc(arr){
     var newArr = arr;
@@ -83,16 +95,16 @@ function rankArrFunc(arr){
         if(arr[a].points !== '' && arr[a].athlete_id !== arr[b].athlete_id){
             if(arr[a].points == arr[b].points){
                 if(parseInt(arr[a].tieOB) > parseInt(arr[b].tieOB)){
-                    // arr[a].rank = rank;
                     newRank = true;
                 }else if(arr[a].tieOB == arr[b].tieOB){
                     if(arr[a].tieOB == ''){
-                        if(arr[a].tieTime < arr[b].tieTime){
+                        var aTime = convertMilliSec(arr[a].tieTime);
+                        var bTime = convertMilliSec(arr[b].tieTime);
+                        if(aTime < bTime){
                             // arr[a].rank = rank;
                             newRank = true;
-                        }else if(arr[a].tieTime == arr[b].tieTime){
+                        }else if(aTime == bTime){
                             // arr[a].rank = rank;
-
                             newRank = true;
                         }else{
                             rank += 1;
@@ -102,28 +114,32 @@ function rankArrFunc(arr){
                         var ath1pts;
                         var ath2res = JSON.parse(arr[b].resultStr);
                         var ath2pts;
+                        // console.log(ath1res);
+                        // console.log(ath2res);
                         for(var a1=0; a1<ath1res.length; a1++){
-                            if(ath1res[a1].key == arr[a].tieOB){
+                            // if(ath1res[a1].key == arr[a].tieOB){
+                            if((a1+1) == arr[a].tieOB){
                                 ath1pts = ath1res[a1].value;
                                 break;
                             }
                         }
                         for(var a2=0; a2<ath2res.length; a2++){
-                            if(ath2res[a2].key == arr[a].tieOB){
+                            // if(ath2res[a2].key == arr[a].tieOB){
+                            if((a2+1) == arr[a].tieOB){ 
                                 ath2pts = ath2res[a2].value;
                                 break;
                             }
                         }
+                        // console.log(ath1pts + ' : ' + ath2pts);
                         
                         if(ath1pts > ath2pts){
-                            // arr[a].rank = rank;
                             newRank = true;
                         }else if(ath1pts == ath2pts){
-                            if(arr[a].tieTime < arr[b].tieTime){
-                                // arr[a].rank = rank;
+                            var aTime = convertMilliSec(arr[a].tieTime);
+                            var bTime = convertMilliSec(arr[b].tieTime);
+                            if(aTime < bTime){
                                 newRank = true;
-                            }else if(arr[a].tieTime == arr[b].tieTime){
-                                // arr[a].rank = rank;
+                            }else if(aTime == bTime){
                                 newRank = true;
                             }else{
                                 rank += 1;
@@ -133,6 +149,11 @@ function rankArrFunc(arr){
                         }
                     }
                 }else{
+                    if(arr[a].athlete_id == 89){
+                        console.log(rank);
+                        console.log(arr[a]);
+                        console.log(arr[b]);
+                    }
                     rank += 1;
                 }
             }else if(arr[a].points < arr[b].points){
@@ -140,20 +161,18 @@ function rankArrFunc(arr){
                 rank += 1;
             }else{
                 //more points
-                // arr[a].rank = rank;
                 newRank = true;
             }
-        // }else{
-        //     newRank = true;
-        // }
         }
     }
     
-    if(newRank == true){
-        arr[a].rank = rank;
-    }else{
-        arr[a].rank = arr.length;
-    }
+        if(newRank == true){
+            // console.log(arr[a]);
+            // console.log(rank);
+            arr[a].rank = rank;
+        }else{
+            arr[a].rank = arr.length;
+        }
     }
     return arr
 }
