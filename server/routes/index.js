@@ -162,6 +162,22 @@ router.post('/add_competitor', function(req, res){
       });
   });
 
+  function sortArr(arr){
+    var cnt = 0;
+    for(var i=0; i<arr.length; i++){
+        if(arr[i].rank == 0){
+            cnt += 1;
+        }
+    }
+    if(cnt > 0){
+        for(var z=0; z<cnt; z++){
+            arr.push(arr[z]);
+        }
+        arr.splice(0, cnt);
+    }
+    return arr;
+}
+
     router.post('/update_season_standings', function(req, res){
     var con = openConnection();
     console.log(req.body.params);
@@ -172,16 +188,17 @@ router.post('/add_competitor', function(req, res){
         ON yr.athlete_id = " + req.body.params.athlete_id + " and yr.course_id = yc.course_id and yc.yl_id = (select yl_id from yl_sessions where current_session=1) \
         ORDER BY rank";
         sqlReq(con,sql).then(resp2=>{
+          var arr = sortArr(resp2);
           var totalScore = 0;
           var loopVal;
-          if(resp2.length > 5){
+          if(arr.length > 5){
             loopVal = 6;
           }else{
-            loopVal = resp2.length;
+            loopVal = arr.length;
           }
           for(var i=0; i<loopVal; i++){
-            if(resp2[i].rank != 0){
-              totalScore += req.body.params.total_athletes - (resp2[i].rank - 1);
+            if(arr[i].rank != 0){
+              totalScore += req.body.params.total_athletes - (arr[i].rank - 1);
             }
           }
           if(resp.length < 1){

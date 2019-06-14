@@ -135,8 +135,8 @@ function rankArrFunc(arr){
                         if(ath1pts > ath2pts){
                             newRank = true;
                         }else if(ath1pts == ath2pts){
-                            var aTime = convertMilliSec(arr[a].tieTime);
-                            var bTime = convertMilliSec(arr[b].tieTime);
+                            // var aTime = convertMilliSec(arr[a].tieTime);
+                            // var bTime = convertMilliSec(arr[b].tieTime);
                             if(arr[a].tieTime < arr[b].tieTime){
                                 newRank = true;
                             }else if(arr[a].tieTime == arr[b].tieTime){
@@ -264,7 +264,7 @@ function sortArr(arr){
     return arr;
 }
 
-function getAvg(arr, comps){
+function getAvg(arr, comps, athCnt){
     arr = sortArr(arr);
     console.log(arr);
     var avg;
@@ -276,11 +276,14 @@ function getAvg(arr, comps){
         total = comps;
     }
     for(var i = 0; i<total; i++){
+        if(arr[i].rank == 0){
+            num += athCnt;
+        }else{
             num += arr[i].rank;
+        }
     }
     if(total > 0){
         avg = num/total;
-        console.log(avg);
     }
     return avg;
 }
@@ -294,7 +297,11 @@ function getPts(arr, comps, athCnt){
         total = comps;
     }
     for(var i = 0; i<total; i++){
+        if(arr[i].rank == 0){
+            num += 0;
+        }else{
             num += athCnt - (arr[i].rank-1);
+        }
     }
     return num;
 }
@@ -310,8 +317,8 @@ export function updateSeasonRanking(athletes){
                     if(athletes[a].pts < athletes[b].pts){
                         rank += 1;
                     }else if(athletes[a].pts == athletes[b].pts){
-                        checkA = getAvg(athletes[a].res, 6);
-                        checkB = getAvg(athletes[b].res, 6);
+                        checkA = getAvg(athletes[a].res, 6, athletes.length);
+                        checkB = getAvg(athletes[b].res, 6, athletes.length);
                         if(checkA > checkB){
                             rank +=1;
                         }else if(checkA == checkB){
@@ -320,8 +327,8 @@ export function updateSeasonRanking(athletes){
                             if(checkA < checkB){
                                 rank += 1;
                             }else if(checkA == checkB){
-                                checkA = getAvg(athletes[a].res, 7);
-                                checkB = getAvg(athletes[b].res, 7);
+                                checkA = getAvg(athletes[a].res, 7, athletes.length);
+                                checkB = getAvg(athletes[b].res, 7, athletes.length);
                                 if(checkA > checkB){
                                     rank +=1;
                                 }else if(checkA == checkB){
@@ -330,8 +337,8 @@ export function updateSeasonRanking(athletes){
                                     if(checkA < checkB){
                                         rank += 1;
                                     }else if(checkA == checkB){
-                                        checkA = getAvg(athletes[a].res, 8);
-                                        checkB = getAvg(athletes[b].res, 8);
+                                        checkA = getAvg(athletes[a].res, 8, athletes.length);
+                                        checkB = getAvg(athletes[b].res, 8, athletes.length);
                                         if(checkA > checkB){
                                             rank +=1;
                                         }

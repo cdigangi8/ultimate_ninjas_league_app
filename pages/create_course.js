@@ -17,33 +17,24 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import { Column, Row } from 'simple-flexbox';
 import {addCompetitor} from '../api/api';
+import '../style/forms.css';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faPlusCircle);
+
 
 class CreateCourse extends Component {
 
 
     state = {
         open: false,
-        comp_date: '',
-        location: '',
+        obstacleArr: [],
         dialogTitle: '',
         dialogMsg: ''
     };
 
-    submitCompetitor = () => {
-        if (this.state.firstName == '' || this.state.lastName == '' || this.state.age == '' || this.state.location == '' || this.state.gender == '') {
-            this.setState({ open: true, dialogMsg: 'Please make sure all fields are filled out!', dialogTitle: 'Warning!' });
-        }else {
-            this.setState({ open: false });
-                addCompetitor(this.state.firstName, this.state.lastName, this.state.age, this.state.location, this.state.gender)
-                .then(res => {
-                    //handle response from api
-                    console.log(res);
-                        // this.props.history.replace('/splash_page');
-                        // console.log(res);
-                        this.setState({ open: true, dialogMsg: 'Successfully added competitor!', dialogTitle: 'Success!', firstName: '', lastName: '', age: '', location: '', gender: '' });
-                })
-        }
-    };
 
     closeDialog = () =>{
         this.setState({ open: false });
@@ -55,6 +46,21 @@ class CreateCourse extends Component {
         });
     };
 
+    handleObstacleChange = (name,idx) => evt => {
+        const newObstacles = this.state.obstacleArr.map((item, oidx) => {
+          if (idx !== oidx) return item;
+          return { ...item, [name]: evt.target.value };
+        });
+    
+        this.setState({ obstacleArr: newObstacles });
+      };
+
+    addObstacle(){
+        var newArr = this.state.obstacleArr.slice();
+        newArr.push({obstacle: '', points: '', pointDesc: [], setupDesc: ''});
+        this.setState({obstacleArr: newArr});
+    }
+
 
 
 
@@ -63,83 +69,28 @@ class CreateCourse extends Component {
     }
 
     render(){
-    return <div>
-        <UNHeader title='Youth League' link='' linkTitle=''></UNHeader>
+    return <div style={{backgroundColor: "rgb(225,225,225)"}}>
+        <UNHeader title='Create New Course' link='' linkTitle=''></UNHeader>
 
         <Row>
                     <div className="pageContainer">
-                        <Row className="pageInstructions" horizontal='center'>Add New Competitor</Row>
-                        <div className="completeProfile">
-                            <Row flexGrow={1} wrap horizontal='spaced'>
-                                <Column flexGrow={1} style={{ marginRight: '10px' }}>
-                                    <TextField
-                                        id="first-name"
-                                        label="First Name"
-                                        value={this.state.firstName}
-                                        onChange={this.handleChange('firstName')}
-                                        margin="dense"
-                                        fullWidth
-                                        required
-                                    />
-                                </Column>
-                                <Column flexGrow={1} style={{ marginRight: '10px' }}>
-                                    <TextField
-                                        required
-                                        id="last-name"
-                                        label="Last Name"
-                                        value={this.state.lastName}
-                                        onChange={this.handleChange('lastName')}
-                                        margin="dense"
-                                        fullWidth
-                                    />
-                                </Column>
-                                <Column flexGrow={1}>
-                                    <TextField
-                                        required
-                                        id="age"
-                                        label="Age"
-                                        value={this.state.age}
-                                        onChange={this.handleChange('age')}
-                                        margin="dense"
-                                        fullWidth
-                                    />
-                                </Column>
+                        {this.state.obstacleArr.map((item, index) => {
+                            return <Row>
+                                <div class="courseObstacleBox">
+                                    <Row horizontal="spaced" vertical="center">
+                                        <div style={{fontSize: "28px;"}}>{index + 1}.</div>
+                                        <div>
+                                        <input className="courseInputBox" type="text" placeholder={`Obstacle`} value={item.obstacle} onChange={this.handleObstacleChange('obstacle' , index)}/>
+                                        </div>
+                                        <div><div><input className="courseInputBox" style={{width: "20px"}} type="text" placeholder={`#`} value={item.points} onChange={this.handleObstacleChange('points' , index)}/></div><div style={{fontSize: ".8em", color: "rgb(125,125,125)"}}>Pts.</div></div>
+                                    </Row>
+                                </div>
                             </Row>
-                            <Row style={{ marginTop: '20px' }}>
-                                <Column flexGrow={1}>
-                                    <FormControl required component="fieldset">
-                                        <FormLabel component="legend">Gender</FormLabel>
-                                        <RadioGroup
-                                            aria-label="Gender"
-                                            name="gender1"
-                                            value={this.state.gender}
-                                            onChange={this.handleChange('gender')}
-                                        >
-                                            <FormControlLabel value="female" control={<Radio />} label="Female" />
-                                            <FormControlLabel value="male" control={<Radio />} label="Male" />
-                                        </RadioGroup>
-                                    </FormControl>
-                                </Column>
-                            </Row>
-                            <Row>
-                                <Column flexGrow={1}>
-                                    <FormControl required>
-                                        <InputLabel>Location</InputLabel>
-                                        <Select
-                                            value={this.state.location}
-                                            onChange={this.handleChange('location')}
-                                        >
-                                            <MenuItem value='1'>Chicago</MenuItem>
-                                            <MenuItem value='2'>Naperville</MenuItem>
-                                            <MenuItem value='3'>Libertyville</MenuItem>
-                                        </Select>
-                                    </FormControl>
-                                </Column>
-                            </Row>
-                            
-                        </div>
+                        })}
                         <Row>
-                            <button className='submitBtn' onClick={e => this.submitCompetitor()}>Submit</button>
+                            <div className="courseObstacleBox" onClick={e=>this.addObstacle()}>
+                            <FontAwesomeIcon icon="plus-circle"/> Add New Obstacle
+                            </div>
                         </Row>
                     </div>
                 </Row>
