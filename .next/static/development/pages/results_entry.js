@@ -47755,7 +47755,12 @@ function (_Component) {
         onClick: function onClick(e) {
           return _this12.setLocation(3);
         }
-      }, "Libertyville"))) : null, this.state.showCourseSelect == true ? react__WEBPACK_IMPORTED_MODULE_12___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_12___default.a.createElement("div", {
+      }, "Libertyville"), react__WEBPACK_IMPORTED_MODULE_12___default.a.createElement("div", {
+        className: "choiceBox",
+        onClick: function onClick(e) {
+          return _this12.setLocation(4);
+        }
+      }, "Finals"))) : null, this.state.showCourseSelect == true ? react__WEBPACK_IMPORTED_MODULE_12___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_12___default.a.createElement("div", {
         className: "subTitle"
       }, "Please Select Your Competition Date"), react__WEBPACK_IMPORTED_MODULE_12___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_32__["Row"], {
         horizontal: "start",
@@ -48115,7 +48120,7 @@ function (_Component) {
 
 /***/ }),
 
-/***/ 6:
+/***/ 7:
 /*!******************************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fresults_entry&absolutePagePath=%2FUsers%2Fchristopherdigangi%2Fgit%2Fultimate_ninjas_app%2Fpages%2Fresults_entry.js ***!
   \******************************************************************************************************************************************************************/
@@ -48138,5 +48143,5 @@ module.exports = dll_6dc2816e14fab51b8269;
 
 /***/ })
 
-},[[6,"static/runtime/webpack.js","styles"]]]));;
+},[[7,"static/runtime/webpack.js","styles"]]]));;
 //# sourceMappingURL=results_entry.js.map

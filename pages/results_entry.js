@@ -338,6 +338,7 @@ submitNewTime(){
                             <div className="choiceBox" onClick={e=>this.setLocation(1)}>Chicago</div>
                             <div className="choiceBox" onClick={e=>this.setLocation(2)}>Naperville</div>
                             <div className="choiceBox" onClick={e=>this.setLocation(3)}>Libertyville</div>
+                            <div className="choiceBox" onClick={e=>this.setLocation(4)}>Finals</div>
                         </Row></div> : null}
                         {this.state.showCourseSelect == true ?
                         <div>

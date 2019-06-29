@@ -240,6 +240,12 @@ class YlLeaderboard extends Component {
                         <div className="optionLetterIcon">L</div>
                         <div className="optionText">Libertyville</div>
                     </Row>
+                    {this.state.standingsView == 'individual' ? 
+                    <Row vertical="center" onClick={e=>this.setLocation(4)} className={this.state.location == '4' ? 'activeListItem optionRow' : 'optionRow'}>
+                        <div className="optionLetterIcon">F</div>
+                        <div className="optionText">Finals</div>
+                    </Row>
+                    : null}
                 </Column>
           {this.state.showCourseSelect == true ?
             <Column className="optionSection">

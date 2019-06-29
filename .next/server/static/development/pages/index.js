@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -923,58 +923,6 @@ function _assertThisInitialized(self) {
 
 /***/ }),
 
-/***/ "./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator.js":
-/*!*****************************************************************************!*\
-  !*** ./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator.js ***!
-  \*****************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _asyncToGenerator; });
-/* harmony import */ var _core_js_promise__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core-js/promise */ "./node_modules/@babel/runtime-corejs2/core-js/promise.js");
-/* harmony import */ var _core_js_promise__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_core_js_promise__WEBPACK_IMPORTED_MODULE_0__);
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
-
-  if (info.done) {
-    resolve(value);
-  } else {
-    _core_js_promise__WEBPACK_IMPORTED_MODULE_0___default.a.resolve(value).then(_next, _throw);
-  }
-}
-
-function _asyncToGenerator(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new _core_js_promise__WEBPACK_IMPORTED_MODULE_0___default.a(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
-}
-
-/***/ }),
-
 /***/ "./node_modules/@babel/runtime-corejs2/helpers/esm/classCallCheck.js":
 /*!***************************************************************************!*\
   !*** ./node_modules/@babel/runtime-corejs2/helpers/esm/classCallCheck.js ***!
@@ -1196,118 +1144,41 @@ function _typeof(obj) {
 
 /***/ }),
 
-/***/ "./node_modules/@babel/runtime-corejs2/regenerator/index.js":
-/*!******************************************************************!*\
-  !*** ./node_modules/@babel/runtime-corejs2/regenerator/index.js ***!
-  \******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! regenerator-runtime */ "regenerator-runtime");
-
-
-/***/ }),
-
-/***/ "./pages/update_season_standings.js":
-/*!******************************************!*\
-  !*** ./pages/update_season_standings.js ***!
-  \******************************************/
+/***/ "./pages/index.js":
+/*!************************!*\
+  !*** ./pages/index.js ***!
+  \************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/regenerator */ "./node_modules/@babel/runtime-corejs2/regenerator/index.js");
-/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_corejs2_core_js_promise__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/promise */ "./node_modules/@babel/runtime-corejs2/core-js/promise.js");
-/* harmony import */ var _babel_runtime_corejs2_core_js_promise__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_promise__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator.js");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/classCallCheck */ "./node_modules/@babel/runtime-corejs2/helpers/esm/classCallCheck.js");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/createClass */ "./node_modules/@babel/runtime-corejs2/helpers/esm/createClass.js");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/possibleConstructorReturn */ "./node_modules/@babel/runtime-corejs2/helpers/esm/possibleConstructorReturn.js");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/getPrototypeOf */ "./node_modules/@babel/runtime-corejs2/helpers/esm/getPrototypeOf.js");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/assertThisInitialized */ "./node_modules/@babel/runtime-corejs2/helpers/esm/assertThisInitialized.js");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/inherits */ "./node_modules/@babel/runtime-corejs2/helpers/esm/inherits.js");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _components_header__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../components/header */ "./components/header.js");
-/* harmony import */ var _style_index_css__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../style/index.css */ "./style/index.css");
-/* harmony import */ var _style_index_css__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_style_index_css__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _api_api__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../api/api */ "./api/api.js");
-/* harmony import */ var _controllers_controllers__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../controllers/controllers */ "./controllers/controllers.js");
-/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @material-ui/core/Button */ "@material-ui/core/Button");
-/* harmony import */ var _material_ui_core_Button__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_15__);
-/* harmony import */ var _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @material-ui/core/TextField */ "@material-ui/core/TextField");
-/* harmony import */ var _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_16__);
-/* harmony import */ var _material_ui_core_Dialog__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @material-ui/core/Dialog */ "@material-ui/core/Dialog");
-/* harmony import */ var _material_ui_core_Dialog__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Dialog__WEBPACK_IMPORTED_MODULE_17__);
-/* harmony import */ var _material_ui_core_DialogActions__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @material-ui/core/DialogActions */ "@material-ui/core/DialogActions");
-/* harmony import */ var _material_ui_core_DialogActions__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_DialogActions__WEBPACK_IMPORTED_MODULE_18__);
-/* harmony import */ var _material_ui_core_DialogContent__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @material-ui/core/DialogContent */ "@material-ui/core/DialogContent");
-/* harmony import */ var _material_ui_core_DialogContent__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_DialogContent__WEBPACK_IMPORTED_MODULE_19__);
-/* harmony import */ var _material_ui_core_DialogContentText__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! @material-ui/core/DialogContentText */ "@material-ui/core/DialogContentText");
-/* harmony import */ var _material_ui_core_DialogContentText__WEBPACK_IMPORTED_MODULE_20___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_DialogContentText__WEBPACK_IMPORTED_MODULE_20__);
-/* harmony import */ var _material_ui_core_DialogTitle__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @material-ui/core/DialogTitle */ "@material-ui/core/DialogTitle");
-/* harmony import */ var _material_ui_core_DialogTitle__WEBPACK_IMPORTED_MODULE_21___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_DialogTitle__WEBPACK_IMPORTED_MODULE_21__);
-/* harmony import */ var _material_ui_core_Radio__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @material-ui/core/Radio */ "@material-ui/core/Radio");
-/* harmony import */ var _material_ui_core_Radio__WEBPACK_IMPORTED_MODULE_22___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Radio__WEBPACK_IMPORTED_MODULE_22__);
-/* harmony import */ var _material_ui_core_RadioGroup__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @material-ui/core/RadioGroup */ "@material-ui/core/RadioGroup");
-/* harmony import */ var _material_ui_core_RadioGroup__WEBPACK_IMPORTED_MODULE_23___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_RadioGroup__WEBPACK_IMPORTED_MODULE_23__);
-/* harmony import */ var _material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @material-ui/core/FormControlLabel */ "@material-ui/core/FormControlLabel");
-/* harmony import */ var _material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_24___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_24__);
-/* harmony import */ var _material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! @material-ui/core/FormControl */ "@material-ui/core/FormControl");
-/* harmony import */ var _material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_25___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_FormControl__WEBPACK_IMPORTED_MODULE_25__);
-/* harmony import */ var _material_ui_core_FormLabel__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! @material-ui/core/FormLabel */ "@material-ui/core/FormLabel");
-/* harmony import */ var _material_ui_core_FormLabel__WEBPACK_IMPORTED_MODULE_26___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_FormLabel__WEBPACK_IMPORTED_MODULE_26__);
-/* harmony import */ var _material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! @material-ui/core/MenuItem */ "@material-ui/core/MenuItem");
-/* harmony import */ var _material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_27___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_MenuItem__WEBPACK_IMPORTED_MODULE_27__);
-/* harmony import */ var _material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! @material-ui/core/InputLabel */ "@material-ui/core/InputLabel");
-/* harmony import */ var _material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_28___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_InputLabel__WEBPACK_IMPORTED_MODULE_28__);
-/* harmony import */ var _material_ui_core_Select__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! @material-ui/core/Select */ "@material-ui/core/Select");
-/* harmony import */ var _material_ui_core_Select__WEBPACK_IMPORTED_MODULE_29___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Select__WEBPACK_IMPORTED_MODULE_29__);
-/* harmony import */ var simple_flexbox__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! simple-flexbox */ "simple-flexbox");
-/* harmony import */ var simple_flexbox__WEBPACK_IMPORTED_MODULE_30___default = /*#__PURE__*/__webpack_require__.n(simple_flexbox__WEBPACK_IMPORTED_MODULE_30__);
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! prop-types */ "prop-types");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_31___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_31__);
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! classnames */ "classnames");
-/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_32___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_32__);
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! @material-ui/core/styles */ "@material-ui/core/styles");
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_33___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_33__);
-/* harmony import */ var _material_ui_core_Drawer__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! @material-ui/core/Drawer */ "@material-ui/core/Drawer");
-/* harmony import */ var _material_ui_core_Drawer__WEBPACK_IMPORTED_MODULE_34___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Drawer__WEBPACK_IMPORTED_MODULE_34__);
-/* harmony import */ var _material_ui_core_AppBar__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! @material-ui/core/AppBar */ "@material-ui/core/AppBar");
-/* harmony import */ var _material_ui_core_AppBar__WEBPACK_IMPORTED_MODULE_35___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_AppBar__WEBPACK_IMPORTED_MODULE_35__);
-/* harmony import */ var _material_ui_core_Toolbar__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! @material-ui/core/Toolbar */ "@material-ui/core/Toolbar");
-/* harmony import */ var _material_ui_core_Toolbar__WEBPACK_IMPORTED_MODULE_36___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Toolbar__WEBPACK_IMPORTED_MODULE_36__);
-/* harmony import */ var _material_ui_core_List__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! @material-ui/core/List */ "@material-ui/core/List");
-/* harmony import */ var _material_ui_core_List__WEBPACK_IMPORTED_MODULE_37___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_List__WEBPACK_IMPORTED_MODULE_37__);
-/* harmony import */ var _material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! @material-ui/core/CssBaseline */ "@material-ui/core/CssBaseline");
-/* harmony import */ var _material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_38___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_38__);
-/* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! @material-ui/core/Typography */ "@material-ui/core/Typography");
-/* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_39___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_39__);
-/* harmony import */ var _material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! @material-ui/core/Divider */ "@material-ui/core/Divider");
-/* harmony import */ var _material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_40___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_40__);
-/* harmony import */ var _material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! @material-ui/core/IconButton */ "@material-ui/core/IconButton");
-/* harmony import */ var _material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_41___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_41__);
-/* harmony import */ var _material_ui_icons_Menu__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! @material-ui/icons/Menu */ "@material-ui/icons/Menu");
-/* harmony import */ var _material_ui_icons_Menu__WEBPACK_IMPORTED_MODULE_42___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Menu__WEBPACK_IMPORTED_MODULE_42__);
-/* harmony import */ var _material_ui_icons_ChevronLeft__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! @material-ui/icons/ChevronLeft */ "@material-ui/icons/ChevronLeft");
-/* harmony import */ var _material_ui_icons_ChevronLeft__WEBPACK_IMPORTED_MODULE_43___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_ChevronLeft__WEBPACK_IMPORTED_MODULE_43__);
-/* harmony import */ var _material_ui_icons_ChevronRight__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! @material-ui/icons/ChevronRight */ "@material-ui/icons/ChevronRight");
-/* harmony import */ var _material_ui_icons_ChevronRight__WEBPACK_IMPORTED_MODULE_44___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_ChevronRight__WEBPACK_IMPORTED_MODULE_44__);
-/* harmony import */ var _material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! @material-ui/core/ListItem */ "@material-ui/core/ListItem");
-/* harmony import */ var _material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_45___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_45__);
-/* harmony import */ var _material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! @material-ui/core/ListItemIcon */ "@material-ui/core/ListItemIcon");
-/* harmony import */ var _material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_46___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_ListItemIcon__WEBPACK_IMPORTED_MODULE_46__);
-/* harmony import */ var _material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! @material-ui/core/ListItemText */ "@material-ui/core/ListItemText");
-/* harmony import */ var _material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_47___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_ListItemText__WEBPACK_IMPORTED_MODULE_47__);
-/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "@fortawesome/fontawesome-svg-core");
-/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_48___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_48__);
-/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "@fortawesome/react-fontawesome");
-/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_49___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_49__);
-/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "@fortawesome/free-solid-svg-icons");
-/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_50___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_50__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/classCallCheck */ "./node_modules/@babel/runtime-corejs2/helpers/esm/classCallCheck.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/createClass */ "./node_modules/@babel/runtime-corejs2/helpers/esm/createClass.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/possibleConstructorReturn */ "./node_modules/@babel/runtime-corejs2/helpers/esm/possibleConstructorReturn.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/getPrototypeOf */ "./node_modules/@babel/runtime-corejs2/helpers/esm/getPrototypeOf.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/assertThisInitialized */ "./node_modules/@babel/runtime-corejs2/helpers/esm/assertThisInitialized.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/inherits */ "./node_modules/@babel/runtime-corejs2/helpers/esm/inherits.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _components_header__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../components/header */ "./components/header.js");
+/* harmony import */ var _style_index_css__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../style/index.css */ "./style/index.css");
+/* harmony import */ var _style_index_css__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_style_index_css__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _api_api__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../api/api */ "./api/api.js");
+/* harmony import */ var _controllers_controllers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../controllers/controllers */ "./controllers/controllers.js");
+/* harmony import */ var simple_flexbox__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! simple-flexbox */ "simple-flexbox");
+/* harmony import */ var simple_flexbox__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(simple_flexbox__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! classnames */ "classnames");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @material-ui/core/CssBaseline */ "@material-ui/core/CssBaseline");
+/* harmony import */ var _material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @fortawesome/fontawesome-svg-core */ "@fortawesome/fontawesome-svg-core");
+/* harmony import */ var _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @fortawesome/react-fontawesome */ "@fortawesome/react-fontawesome");
+/* harmony import */ var _fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_16__);
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @fortawesome/free-solid-svg-icons */ "@fortawesome/free-solid-svg-icons");
+/* harmony import */ var _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_17__);
 
 
 
@@ -1326,73 +1197,104 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_15__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_17__["faListOl"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_17__["faBars"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_17__["faMapMarkerAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_17__["faHashtag"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_17__["faCalendarDay"]); // const drawerWidth = 300;
+// const styles = theme => ({
+//   root: {
+//     display: 'flex',
+//   },
+//   menuButton: {
+//     marginLeft: 12,
+//     marginRight: 36,
+//   },
+//   hide: {
+//     display: 'none',
+//   },
+//   drawer: {
+//     width: drawerWidth,
+//     flexShrink: 0,
+//     whiteSpace: 'nowrap',
+//   },
+//   drawerOpen: {
+//     width: drawerWidth,
+//     transition: theme.transitions.create('width', {
+//       easing: theme.transitions.easing.sharp,
+//       duration: theme.transitions.duration.enteringScreen,
+//     }),
+//   },
+//   drawerClose: {
+//     transition: theme.transitions.create('width', {
+//       easing: theme.transitions.easing.sharp,
+//       duration: theme.transitions.duration.leavingScreen,
+//     }),
+//     overflowX: 'hidden',
+//     width: theme.spacing.unit * 7 + 1,
+//     [theme.breakpoints.up('sm')]: {
+//       width: theme.spacing.unit * 7 + 1,
+//     },
+//   },
+//   toolbar: {
+//     display: 'flex',
+//     alignItems: 'center',
+//     justifyContent: 'flex-end',
+//     padding: '0 8px',
+//     ...theme.mixins.toolbar,
+//   },
+//   content: {
+//     flexGrow: 1,
+//     padding: theme.spacing.unit * 3,
+//   },
+// activeListItem:{
+//     backgroundColor: "rgba(0,90,180,0.5)",
+//     color: "#ffffff"
+// }
+// });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_48__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_50__["faListOl"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_50__["faBars"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_50__["faMapMarkerAlt"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_50__["faHashtag"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_50__["faCalendarDay"]);
-
-var UpdateStandings =
+var YlLeaderboard =
 /*#__PURE__*/
 function (_Component) {
-  Object(_babel_runtime_corejs2_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_8__["default"])(UpdateStandings, _Component);
+  Object(_babel_runtime_corejs2_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_5__["default"])(YlLeaderboard, _Component);
 
-  function UpdateStandings() {
+  function YlLeaderboard() {
     var _getPrototypeOf2;
 
     var _this;
 
-    Object(_babel_runtime_corejs2_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_3__["default"])(this, UpdateStandings);
+    Object(_babel_runtime_corejs2_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_0__["default"])(this, YlLeaderboard);
 
     for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
       args[_key] = arguments[_key];
     }
 
-    _this = Object(_babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_5__["default"])(this, (_getPrototypeOf2 = Object(_babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_6__["default"])(UpdateStandings)).call.apply(_getPrototypeOf2, [this].concat(args)));
+    _this = Object(_babel_runtime_corejs2_helpers_esm_possibleConstructorReturn__WEBPACK_IMPORTED_MODULE_2__["default"])(this, (_getPrototypeOf2 = Object(_babel_runtime_corejs2_helpers_esm_getPrototypeOf__WEBPACK_IMPORTED_MODULE_3__["default"])(YlLeaderboard)).call.apply(_getPrototypeOf2, [this].concat(args)));
 
-    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_9__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_7__["default"])(_this), "state", {
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this), "state", {
       location: "",
+      courses: [],
       athletes: [],
+      obstacles: [],
+      courseIndex: "",
       showLocationSelect: true,
+      showCourseSelect: false,
       showAgeSelect: false,
       showCompetitors: false,
       ageMin: '',
       ageMax: '',
+      showScorecard: false,
+      currentAthlete: '',
+      currentAthleteIndex: '',
+      tiebreakerOb: "",
+      tieBreakMin: '',
+      tieBreakSec: '',
+      tieBreakMs: '',
       openDialog: false,
+      resultsArr: [],
       rankArr: [],
+      standingsView: 'season',
+      compDate: '',
       open: true
     });
 
-    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_9__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_7__["default"])(_this), "handleDrawer", function () {
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this), "handleDrawer", function () {
       if (_this.state.open == false) {
         _this.setState({
           open: true
@@ -1404,197 +1306,143 @@ function (_Component) {
       }
     });
 
-    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_9__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_7__["default"])(_this), "handleChange", function (name) {
+    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_4__["default"])(_this), "handleChange", function (name) {
       return function (event) {
-        _this.setState(Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_9__["default"])({}, name, event.target.value));
+        _this.setState(Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])({}, name, event.target.value));
       };
-    });
-
-    Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_9__["default"])(Object(_babel_runtime_corejs2_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_7__["default"])(_this), "closeDialog", function (type) {
-      _this.setState({
-        openDialog: false
-      });
     });
 
     return _this;
   }
 
-  Object(_babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_4__["default"])(UpdateStandings, [{
+  Object(_babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_1__["default"])(YlLeaderboard, [{
+    key: "setStandings",
+    value: function setStandings(val) {
+      this.setState({
+        standingsView: val,
+        location: '',
+        showCourseSelect: false,
+        showAgeSelect: false,
+        showCompetitors: false,
+        ageMin: '',
+        ageMax: '',
+        compDate: ''
+      });
+    }
+  }, {
     key: "setLocation",
     value: function setLocation(val) {
+      var _this2 = this;
+
+      if (this.state.standingsView == 'season') {
+        this.setState({
+          location: val,
+          showAgeSelect: true,
+          ageMin: '',
+          ageMax: '',
+          showCompetitors: false,
+          showCourseSelect: false
+        });
+      } else {
+        Object(_api_api__WEBPACK_IMPORTED_MODULE_10__["getCompInfo"])(val).then(function (resp) {
+          _this2.setState({
+            courses: resp.data.courses,
+            athletes: resp.data.athletes,
+            location: val,
+            showLocationSelect: false,
+            showCourseSelect: true,
+            showAgeSelect: false,
+            showCompetitors: false,
+            compDate: ''
+          });
+        });
+      }
+    }
+  }, {
+    key: "setCourse",
+    value: function setCourse(ind) {
+      var _this3 = this;
+
       this.setState({
-        location: val,
+        courseIndex: ind,
         showAgeSelect: true,
+        compDate: this.state.courses[ind].comp_date.split("T")[0],
         ageMin: '',
         ageMax: '',
         showCompetitors: false
       });
-    }
-  }, {
-    key: "confirmSubmission",
-    value: function confirmSubmission(val) {
-      this.setState({
-        openDialog: true
+      Object(_api_api__WEBPACK_IMPORTED_MODULE_10__["getCourseObstacles"])(this.state.courses[ind].course_id).then(function (resp) {
+        Object(_controllers_controllers__WEBPACK_IMPORTED_MODULE_11__["convertObstacles"])(resp.data.obstacles).then(function (resp2) {
+          _this3.setState({
+            obstacles: resp2,
+            resultsArr: resp.data.results
+          });
+        });
       });
     }
   }, {
     key: "setAgeGroup",
     value: function setAgeGroup(min, max) {
-      var _this2 = this;
+      var _this4 = this;
 
       this.setState({
         ageMin: min,
         ageMax: max,
         showCompetitors: true
       });
-      Object(_api_api__WEBPACK_IMPORTED_MODULE_13__["getAthletes"])(this.state.location, max, min).then(function (resp) {
-        Object(_api_api__WEBPACK_IMPORTED_MODULE_13__["getStandings"])(min, max, _this2.state.location).then(function (resp2) {
-          _this2.setState({
-            athletes: resp.data.athletes,
-            rankArr: resp2.data.standings
+
+      if (this.state.standingsView == 'season') {
+        Object(_api_api__WEBPACK_IMPORTED_MODULE_10__["getStandings"])(min, max, this.state.location).then(function (resp) {
+          _this4.setState({
+            rankArr: resp.data.standings
           });
         });
-      });
+      } else {
+        Object(_controllers_controllers__WEBPACK_IMPORTED_MODULE_11__["rankFunction"])(this.state.resultsArr, this.state.athletes, min, max).then(function (resp) {
+          console.log(resp);
+
+          _this4.setState({
+            rankArr: resp.array
+          });
+        });
+      }
     }
   }, {
-    key: "updateSeasonRanks",
-    value: function () {
-      var _updateSeasonRanks = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
-      /*#__PURE__*/
-      _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(arr) {
-        var resolvedFinalArray, respArr;
-        return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                console.log(arr);
-                _context2.next = 3;
-                return _babel_runtime_corejs2_core_js_promise__WEBPACK_IMPORTED_MODULE_1___default.a.all(arr.map(
-                /*#__PURE__*/
-                function () {
-                  var _ref = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
-                  /*#__PURE__*/
-                  _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(value) {
-                    var result;
-                    return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-                      while (1) {
-                        switch (_context.prev = _context.next) {
-                          case 0:
-                            _context.next = 2;
-                            return Object(_api_api__WEBPACK_IMPORTED_MODULE_13__["postUpdatedRankings"])(value);
+    key: "goBack",
+    value: function goBack() {
+      var _this5 = this;
 
-                          case 2:
-                            result = _context.sent;
-                            return _context.abrupt("return", result);
-
-                          case 4:
-                          case "end":
-                            return _context.stop();
-                        }
-                      }
-                    }, _callee);
-                  }));
-
-                  return function (_x2) {
-                    return _ref.apply(this, arguments);
-                  };
-                }()));
-
-              case 3:
-                resolvedFinalArray = _context2.sent;
-                respArr = resolvedFinalArray;
-                console.log(respArr);
-
-              case 6:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }));
-
-      function updateSeasonRanks(_x) {
-        return _updateSeasonRanks.apply(this, arguments);
+      if (this.state.showScorecard == true) {
+        Object(_controllers_controllers__WEBPACK_IMPORTED_MODULE_11__["resetObstacleArr"])(this.state.obstacles).then(function (resp) {
+          _this5.setState({
+            showScorecard: false,
+            showCompetitors: true,
+            currentAthlete: '',
+            showAgeSelect: true,
+            obstacles: resp
+          });
+        });
+      } else if (this.state.showCompetitors == true || this.state.showAgeSelect == true) {
+        this.setState({
+          showCompetitors: false,
+          ageMin: '',
+          ageMax: '',
+          showAgeSelect: false,
+          showCourseSelect: true,
+          obstacles: [],
+          resultsArr: []
+        });
+      } else {
+        this.setState({
+          showCourseSelect: false,
+          courseIndex: '',
+          courses: [],
+          athletes: [],
+          location: '',
+          showLocationSelect: true
+        });
       }
-
-      return updateSeasonRanks;
-    }()
-  }, {
-    key: "updateSeasonStandings",
-    value: function () {
-      var _updateSeasonStandings = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
-      /*#__PURE__*/
-      _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-        var _this3 = this;
-
-        var resolvedFinalArray, respArr;
-        return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
-          while (1) {
-            switch (_context4.prev = _context4.next) {
-              case 0:
-                _context4.next = 2;
-                return _babel_runtime_corejs2_core_js_promise__WEBPACK_IMPORTED_MODULE_1___default.a.all(this.state.athletes.map(
-                /*#__PURE__*/
-                function () {
-                  var _ref2 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
-                  /*#__PURE__*/
-                  _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(value) {
-                    var result;
-                    return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
-                      while (1) {
-                        switch (_context3.prev = _context3.next) {
-                          case 0:
-                            _context3.next = 2;
-                            return Object(_api_api__WEBPACK_IMPORTED_MODULE_13__["updateStandings"])(value, _this3.state.athletes.length);
-
-                          case 2:
-                            result = _context3.sent;
-                            return _context3.abrupt("return", {
-                              pts: result.data.points,
-                              res: result.data.rankings,
-                              ath: value.athlete_id
-                            });
-
-                          case 4:
-                          case "end":
-                            return _context3.stop();
-                        }
-                      }
-                    }, _callee3);
-                  }));
-
-                  return function (_x3) {
-                    return _ref2.apply(this, arguments);
-                  };
-                }()));
-
-              case 2:
-                resolvedFinalArray = _context4.sent;
-                respArr = resolvedFinalArray;
-                this.setState({
-                  showCompetitors: false,
-                  ageMin: '',
-                  ageMax: '',
-                  openDialog: false
-                });
-                Object(_controllers_controllers__WEBPACK_IMPORTED_MODULE_14__["updateSeasonRanking"])(respArr).then(function (resp) {
-                  _this3.updateSeasonRanks(resp.array);
-                });
-
-              case 6:
-              case "end":
-                return _context4.stop();
-            }
-          }
-        }, _callee4, this);
-      }));
-
-      function updateSeasonStandings() {
-        return _updateSeasonStandings.apply(this, arguments);
-      }
-
-      return updateSeasonStandings;
-    }()
+    }
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
@@ -1603,193 +1451,265 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this4 = this;
+      var _this6 = this;
 
-      return react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
+      // const { classes, theme } = this.props;
+      return react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "mainBack"
-      }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(_components_header__WEBPACK_IMPORTED_MODULE_11__["default"], {
-        title: "Update Youth League Standings",
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_components_header__WEBPACK_IMPORTED_MODULE_8__["default"], {
+        title: "Youth League Results",
         link: "",
         linkTitle: ""
-      }), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_30__["Row"], null, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
+      }), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_12__["Row"], null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         id: "drawer-container",
         style: {
           position: "relative"
         }
-      }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(_material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_38___default.a, null), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
-        className: classnames__WEBPACK_IMPORTED_MODULE_32___default()('drawer', {
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_material_ui_core_CssBaseline__WEBPACK_IMPORTED_MODULE_14___default.a, null), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+        className: classnames__WEBPACK_IMPORTED_MODULE_13___default()('drawer', {
           'drawerOpen': this.state.open,
           'drawerClose': !this.state.open
         }),
         classes: {
-          paper: classnames__WEBPACK_IMPORTED_MODULE_32___default()({
+          paper: classnames__WEBPACK_IMPORTED_MODULE_13___default()({
             'drawerOpen': this.state.open,
             'drawerClose': !this.state.open
           })
         },
         open: this.state.open
-      }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "toolbar"
-      }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("span", {
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("span", {
         className: "toolbarBtn"
-      }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_49__["FontAwesomeIcon"], {
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_16__["FontAwesomeIcon"], {
         onClick: this.handleDrawer,
         icon: "bars"
-      })), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("span", {
+      })), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("span", {
         style: {
           marginLeft: "20px",
           fontWeight: "bold",
           color: "rgb(62, 105, 154)"
         }
-      }, "Options")), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_30__["Column"], {
+      }, "Options")), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_12__["Column"], {
         className: "optionSection"
-      }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_30__["Row"], {
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_12__["Row"], {
         vertical: "center",
         className: "titleRow"
-      }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "titleIcon"
-      }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_49__["FontAwesomeIcon"], {
-        icon: "map-marker-alt"
-      })), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_16__["FontAwesomeIcon"], {
+        icon: "list-ol"
+      })), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "titleText"
-      }, "Location")), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_30__["Row"], {
+      }, "Standings")), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_12__["Row"], {
         vertical: "center",
         onClick: function onClick(e) {
-          return _this4.setLocation(1);
+          return _this6.setStandings('season');
+        },
+        className: this.state.standingsView == 'season' ? 'activeListItem optionRow' : 'optionRow'
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+        className: "optionLetterIcon"
+      }, "S"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+        className: "optionText"
+      }, "Season Standings")), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_12__["Row"], {
+        vertical: "center",
+        onClick: function onClick(e) {
+          return _this6.setStandings('individual');
+        },
+        className: this.state.standingsView == 'individual' ? 'activeListItem optionRow' : 'optionRow'
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+        className: "optionLetterIcon"
+      }, "I"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+        className: "optionText"
+      }, "Individual Competition"))), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_12__["Column"], {
+        className: "optionSection"
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_12__["Row"], {
+        vertical: "center",
+        className: "titleRow"
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+        className: "titleIcon"
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_16__["FontAwesomeIcon"], {
+        icon: "map-marker-alt"
+      })), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+        className: "titleText"
+      }, "Location")), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_12__["Row"], {
+        vertical: "center",
+        onClick: function onClick(e) {
+          return _this6.setLocation(1);
         },
         className: this.state.location == '1' ? 'activeListItem optionRow' : 'optionRow'
-      }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "optionLetterIcon"
-      }, "C"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
+      }, "C"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "optionText"
-      }, "Chicago")), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_30__["Row"], {
+      }, "Chicago")), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_12__["Row"], {
         vertical: "center",
         onClick: function onClick(e) {
-          return _this4.setLocation(2);
+          return _this6.setLocation(2);
         },
         className: this.state.location == '2' ? 'activeListItem optionRow' : 'optionRow'
-      }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "optionLetterIcon"
-      }, "N"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
+      }, "N"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "optionText"
-      }, "Naperville")), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_30__["Row"], {
+      }, "Naperville")), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_12__["Row"], {
         vertical: "center",
         onClick: function onClick(e) {
-          return _this4.setLocation(3);
+          return _this6.setLocation(3);
         },
         className: this.state.location == '3' ? 'activeListItem optionRow' : 'optionRow'
-      }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "optionLetterIcon"
-      }, "L"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
+      }, "L"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "optionText"
-      }, "Libertyville"))), this.state.showAgeSelect == true ? react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_30__["Column"], {
+      }, "Libertyville")), this.state.standingsView == 'individual' ? react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_12__["Row"], {
+        vertical: "center",
+        onClick: function onClick(e) {
+          return _this6.setLocation(4);
+        },
+        className: this.state.location == '4' ? 'activeListItem optionRow' : 'optionRow'
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+        className: "optionLetterIcon"
+      }, "F"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+        className: "optionText"
+      }, "Finals")) : null), this.state.showCourseSelect == true ? react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_12__["Column"], {
         className: "optionSection"
-      }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_30__["Row"], {
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_12__["Row"], {
         vertical: "center",
         className: "titleRow"
-      }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "titleIcon"
-      }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_49__["FontAwesomeIcon"], {
-        icon: "hashtag"
-      })), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_16__["FontAwesomeIcon"], {
+        icon: "calendar-day"
+      })), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "titleText"
-      }, "Age Group")), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_30__["Row"], {
+      }, "Competition Date")), this.state.courses.map(function (item, index) {
+        return react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_12__["Row"], {
+          vertical: "center",
+          onClick: function onClick(e) {
+            return _this6.setCourse(index);
+          },
+          className: _this6.state.compDate == item.comp_date.split("T")[0] ? 'activeListItem optionRow' : 'optionRow'
+        }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+          className: "optionLetterIcon"
+        }, index + 1), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+          className: "optionText"
+        }, item.comp_date.split("T")[0]));
+      })) : null, this.state.showAgeSelect == true ? react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_12__["Column"], {
+        className: "optionSection"
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_12__["Row"], {
+        vertical: "center",
+        className: "titleRow"
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+        className: "titleIcon"
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_16__["FontAwesomeIcon"], {
+        icon: "hashtag"
+      })), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+        className: "titleText"
+      }, "Age Group")), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_12__["Row"], {
         vertical: "center",
         onClick: function onClick(e) {
-          return _this4.setAgeGroup(6, 8);
+          return _this6.setAgeGroup(6, 8);
         },
         className: this.state.ageMax == 8 ? 'activeListItem optionRow' : 'optionRow'
-      }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "optionLetterIcon"
-      }, "1"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
+      }, "1"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "optionText"
-      }, "Ages 6-8")), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_30__["Row"], {
+      }, "Ages 6-8")), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_12__["Row"], {
         vertical: "center",
         onClick: function onClick(e) {
-          return _this4.setAgeGroup(9, 10);
+          return _this6.setAgeGroup(9, 10);
         },
         className: this.state.ageMax == 10 ? 'activeListItem optionRow' : 'optionRow'
-      }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "optionLetterIcon"
-      }, "2"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
+      }, "2"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "optionText"
-      }, "Ages 9-10")), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_30__["Row"], {
+      }, "Ages 9-10")), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_12__["Row"], {
         vertical: "center",
         onClick: function onClick(e) {
-          return _this4.setAgeGroup(11, 12);
+          return _this6.setAgeGroup(11, 12);
         },
         className: this.state.ageMax == 12 ? 'activeListItem optionRow' : 'optionRow'
-      }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "optionLetterIcon"
-      }, "3"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
+      }, "3"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "optionText"
-      }, "Ages 11-12")), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_30__["Row"], {
+      }, "Ages 11-12")), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_12__["Row"], {
         vertical: "center",
         onClick: function onClick(e) {
-          return _this4.setAgeGroup(13, 16);
+          return _this6.setAgeGroup(13, 16);
         },
         className: this.state.ageMax == 16 ? 'activeListItem optionRow' : 'optionRow'
-      }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "optionLetterIcon"
-      }, "4"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
+      }, "4"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "optionText"
-      }, "Ages 13-16"))) : null)), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
+      }, "Ages 13-16"))) : null)), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "pageContainer"
-      }, this.state.showCompetitors == true ? react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("button", {
-        className: "submitBtn",
-        style: {
-          marginBottom: "0px"
-        },
-        onClick: function onClick(e) {
-          return _this4.confirmSubmission('scorecard');
-        }
-      }, "Update Standings"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
+      }, this.state.showCompetitors == true && this.state.standingsView == 'individual' ? react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
         className: "subTitle",
         style: {
           color: "#ffffff"
         }
-      }, "Standings"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_30__["Column"], {
+      }, "Results"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_12__["Column"], {
         horizontal: "spaced",
         wrap: true,
         style: {
           marginTop: "20px"
         }
       }, this.state.rankArr.map(function (item, index) {
-        return react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
+        if (item.age >= _this6.state.ageMin && item.age < _this6.state.ageMax + 1) {
+          // return <div className={item.completed == true ? "athleteBox completed" : "athleteBox"}>
+          return react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+            className: "athleteStandingsBox"
+          }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_12__["Row"], {
+            horizontal: "space-around",
+            vertical: "center"
+          }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, item.rank, "."), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, item.first_name + ' ' + item.last_name.substring(0, 1)), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, item.points), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+            style: {
+              fontSize: ".8em",
+              color: "rgb(225,225,225)"
+            }
+          }, "Pts."))));
+        }
+      })), " ") : null, this.state.showCompetitors == true && this.state.standingsView == 'season' ? react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
+        className: "subTitle",
+        style: {
+          color: "#ffffff"
+        }
+      }, "Standings"), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_12__["Column"], {
+        horizontal: "spaced",
+        wrap: true,
+        style: {
+          marginTop: "20px"
+        }
+      }, this.state.rankArr.map(function (item, index) {
+        return react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
           className: "athleteStandingsBox"
-        }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_30__["Row"], {
+        }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_12__["Row"], {
           horizontal: "space-around",
           vertical: "center"
-        }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", null, item.rank, "."), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", null, item.first_name + ' ' + item.last_name.substring(0, 1)), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", null, item.Points), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement("div", {
+        }, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, item.rank, "."), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, item.first_name + ' ' + item.last_name.substring(0, 1)), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", null, item.Points), react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement("div", {
           style: {
             fontSize: ".8em",
             color: "rgb(225,225,225)"
           }
         }, "Pts."))));
-      })), " ") : null)), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(_material_ui_core_Dialog__WEBPACK_IMPORTED_MODULE_17___default.a, {
-        open: this.state.openDialog,
-        onClose: this.handleClose,
-        "aria-labelledby": "form-dialog-title"
-      }, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(_material_ui_core_DialogTitle__WEBPACK_IMPORTED_MODULE_21___default.a, {
-        id: "form-dialog-title"
-      }, "Are you sure you want to update the season standings?"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(_material_ui_core_DialogContent__WEBPACK_IMPORTED_MODULE_19___default.a, null, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(_material_ui_core_DialogContentText__WEBPACK_IMPORTED_MODULE_20___default.a, null)), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(_material_ui_core_DialogActions__WEBPACK_IMPORTED_MODULE_18___default.a, null, react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_15___default.a, {
-        type: "submit",
-        onClick: function onClick(e) {
-          return _this4.updateSeasonStandings();
-        },
-        color: "primary"
-      }, "Submit"), react__WEBPACK_IMPORTED_MODULE_10___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_15___default.a, {
-        type: "submit",
-        onClick: this.closeDialog,
-        color: "default"
-      }, "Cancel"))));
+      })), " ") : null)));
     }
   }]);
 
-  return UpdateStandings;
-}(react__WEBPACK_IMPORTED_MODULE_10__["Component"]);
+  return YlLeaderboard;
+}(react__WEBPACK_IMPORTED_MODULE_7__["Component"]); //   YlLeaderboard.propTypes = {
+//     classes: PropTypes.object.isRequired,
+//     theme: PropTypes.object.isRequired,
+//   };
+//   export default withStyles(styles, { withTheme: true })(YlLeaderboard);
 
-/* harmony default export */ __webpack_exports__["default"] = (UpdateStandings);
+
+/* harmony default export */ __webpack_exports__["default"] = (YlLeaderboard);
 
 /***/ }),
 
@@ -1815,14 +1735,14 @@ function (_Component) {
 
 /***/ }),
 
-/***/ 5:
-/*!************************************************!*\
-  !*** multi ./pages/update_season_standings.js ***!
-  \************************************************/
+/***/ 3:
+/*!******************************!*\
+  !*** multi ./pages/index.js ***!
+  \******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/christopherdigangi/git/ultimate_ninjas_app/pages/update_season_standings.js */"./pages/update_season_standings.js");
+module.exports = __webpack_require__(/*! /Users/christopherdigangi/git/ultimate_ninjas_app/pages/index.js */"./pages/index.js");
 
 
 /***/ }),
@@ -1860,28 +1780,6 @@ module.exports = require("@fortawesome/react-fontawesome");
 
 /***/ }),
 
-/***/ "@material-ui/core/AppBar":
-/*!*******************************************!*\
-  !*** external "@material-ui/core/AppBar" ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/AppBar");
-
-/***/ }),
-
-/***/ "@material-ui/core/Button":
-/*!*******************************************!*\
-  !*** external "@material-ui/core/Button" ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/Button");
-
-/***/ }),
-
 /***/ "@material-ui/core/CssBaseline":
 /*!************************************************!*\
   !*** external "@material-ui/core/CssBaseline" ***!
@@ -1890,303 +1788,6 @@ module.exports = require("@material-ui/core/Button");
 /***/ (function(module, exports) {
 
 module.exports = require("@material-ui/core/CssBaseline");
-
-/***/ }),
-
-/***/ "@material-ui/core/Dialog":
-/*!*******************************************!*\
-  !*** external "@material-ui/core/Dialog" ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/Dialog");
-
-/***/ }),
-
-/***/ "@material-ui/core/DialogActions":
-/*!**************************************************!*\
-  !*** external "@material-ui/core/DialogActions" ***!
-  \**************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/DialogActions");
-
-/***/ }),
-
-/***/ "@material-ui/core/DialogContent":
-/*!**************************************************!*\
-  !*** external "@material-ui/core/DialogContent" ***!
-  \**************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/DialogContent");
-
-/***/ }),
-
-/***/ "@material-ui/core/DialogContentText":
-/*!******************************************************!*\
-  !*** external "@material-ui/core/DialogContentText" ***!
-  \******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/DialogContentText");
-
-/***/ }),
-
-/***/ "@material-ui/core/DialogTitle":
-/*!************************************************!*\
-  !*** external "@material-ui/core/DialogTitle" ***!
-  \************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/DialogTitle");
-
-/***/ }),
-
-/***/ "@material-ui/core/Divider":
-/*!********************************************!*\
-  !*** external "@material-ui/core/Divider" ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/Divider");
-
-/***/ }),
-
-/***/ "@material-ui/core/Drawer":
-/*!*******************************************!*\
-  !*** external "@material-ui/core/Drawer" ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/Drawer");
-
-/***/ }),
-
-/***/ "@material-ui/core/FormControl":
-/*!************************************************!*\
-  !*** external "@material-ui/core/FormControl" ***!
-  \************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/FormControl");
-
-/***/ }),
-
-/***/ "@material-ui/core/FormControlLabel":
-/*!*****************************************************!*\
-  !*** external "@material-ui/core/FormControlLabel" ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/FormControlLabel");
-
-/***/ }),
-
-/***/ "@material-ui/core/FormLabel":
-/*!**********************************************!*\
-  !*** external "@material-ui/core/FormLabel" ***!
-  \**********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/FormLabel");
-
-/***/ }),
-
-/***/ "@material-ui/core/IconButton":
-/*!***********************************************!*\
-  !*** external "@material-ui/core/IconButton" ***!
-  \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/IconButton");
-
-/***/ }),
-
-/***/ "@material-ui/core/InputLabel":
-/*!***********************************************!*\
-  !*** external "@material-ui/core/InputLabel" ***!
-  \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/InputLabel");
-
-/***/ }),
-
-/***/ "@material-ui/core/List":
-/*!*****************************************!*\
-  !*** external "@material-ui/core/List" ***!
-  \*****************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/List");
-
-/***/ }),
-
-/***/ "@material-ui/core/ListItem":
-/*!*********************************************!*\
-  !*** external "@material-ui/core/ListItem" ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/ListItem");
-
-/***/ }),
-
-/***/ "@material-ui/core/ListItemIcon":
-/*!*************************************************!*\
-  !*** external "@material-ui/core/ListItemIcon" ***!
-  \*************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/ListItemIcon");
-
-/***/ }),
-
-/***/ "@material-ui/core/ListItemText":
-/*!*************************************************!*\
-  !*** external "@material-ui/core/ListItemText" ***!
-  \*************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/ListItemText");
-
-/***/ }),
-
-/***/ "@material-ui/core/MenuItem":
-/*!*********************************************!*\
-  !*** external "@material-ui/core/MenuItem" ***!
-  \*********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/MenuItem");
-
-/***/ }),
-
-/***/ "@material-ui/core/Radio":
-/*!******************************************!*\
-  !*** external "@material-ui/core/Radio" ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/Radio");
-
-/***/ }),
-
-/***/ "@material-ui/core/RadioGroup":
-/*!***********************************************!*\
-  !*** external "@material-ui/core/RadioGroup" ***!
-  \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/RadioGroup");
-
-/***/ }),
-
-/***/ "@material-ui/core/Select":
-/*!*******************************************!*\
-  !*** external "@material-ui/core/Select" ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/Select");
-
-/***/ }),
-
-/***/ "@material-ui/core/TextField":
-/*!**********************************************!*\
-  !*** external "@material-ui/core/TextField" ***!
-  \**********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/TextField");
-
-/***/ }),
-
-/***/ "@material-ui/core/Toolbar":
-/*!********************************************!*\
-  !*** external "@material-ui/core/Toolbar" ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/Toolbar");
-
-/***/ }),
-
-/***/ "@material-ui/core/Typography":
-/*!***********************************************!*\
-  !*** external "@material-ui/core/Typography" ***!
-  \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/Typography");
-
-/***/ }),
-
-/***/ "@material-ui/core/styles":
-/*!*******************************************!*\
-  !*** external "@material-ui/core/styles" ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/core/styles");
-
-/***/ }),
-
-/***/ "@material-ui/icons/ChevronLeft":
-/*!*************************************************!*\
-  !*** external "@material-ui/icons/ChevronLeft" ***!
-  \*************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/icons/ChevronLeft");
-
-/***/ }),
-
-/***/ "@material-ui/icons/ChevronRight":
-/*!**************************************************!*\
-  !*** external "@material-ui/icons/ChevronRight" ***!
-  \**************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/icons/ChevronRight");
-
-/***/ }),
-
-/***/ "@material-ui/icons/Menu":
-/*!******************************************!*\
-  !*** external "@material-ui/icons/Menu" ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("@material-ui/icons/Menu");
 
 /***/ }),
 
@@ -2311,17 +1912,6 @@ module.exports = require("http");
 
 /***/ }),
 
-/***/ "prop-types":
-/*!*****************************!*\
-  !*** external "prop-types" ***!
-  \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("prop-types");
-
-/***/ }),
-
 /***/ "react":
 /*!************************!*\
   !*** external "react" ***!
@@ -2330,17 +1920,6 @@ module.exports = require("prop-types");
 /***/ (function(module, exports) {
 
 module.exports = require("react");
-
-/***/ }),
-
-/***/ "regenerator-runtime":
-/*!**************************************!*\
-  !*** external "regenerator-runtime" ***!
-  \**************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = require("regenerator-runtime");
 
 /***/ }),
 
@@ -2356,4 +1935,4 @@ module.exports = require("simple-flexbox");
 /***/ })
 
 /******/ });
-//# sourceMappingURL=update_season_standings.js.map
+//# sourceMappingURL=index.js.map

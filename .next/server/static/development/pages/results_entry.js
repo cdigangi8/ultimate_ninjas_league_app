@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -2496,7 +2496,12 @@ function (_Component) {
         onClick: function onClick(e) {
           return _this12.setLocation(3);
         }
-      }, "Libertyville"))) : null, this.state.showCourseSelect == true ? react__WEBPACK_IMPORTED_MODULE_12___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_12___default.a.createElement("div", {
+      }, "Libertyville"), react__WEBPACK_IMPORTED_MODULE_12___default.a.createElement("div", {
+        className: "choiceBox",
+        onClick: function onClick(e) {
+          return _this12.setLocation(4);
+        }
+      }, "Finals"))) : null, this.state.showCourseSelect == true ? react__WEBPACK_IMPORTED_MODULE_12___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_12___default.a.createElement("div", {
         className: "subTitle"
       }, "Please Select Your Competition Date"), react__WEBPACK_IMPORTED_MODULE_12___default.a.createElement(simple_flexbox__WEBPACK_IMPORTED_MODULE_32__["Row"], {
         horizontal: "start",
@@ -2867,7 +2872,7 @@ function (_Component) {
 
 /***/ }),
 
-/***/ 4:
+/***/ 5:
 /*!**************************************!*\
   !*** multi ./pages/results_entry.js ***!
   \**************************************/
